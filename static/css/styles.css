@@ -1,0 +1,65 @@
+:root {
+    --aaa-azul: #0b3d64;
+    --aaa-azul-claro: #1573b5;
+    --aaa-verde: #1f8a5c;
+    --aaa-gris: #f4f6f8;
+}
+
+body {
+    background-color: var(--aaa-gris);
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.institucional-navbar {
+    background: linear-gradient(90deg, var(--aaa-azul) 0%, var(--aaa-azul-claro) 100%);
+}
+
+.subtitulo-institucional {
+    background-color: var(--aaa-verde);
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.card-institucional {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    transition: transform 0.15s ease;
+}
+
+.card-institucional:hover {
+    transform: translateY(-2px);
+}
+
+.stat-card {
+    border-left: 5px solid var(--aaa-azul-claro);
+}
+
+.badge-estado-Recibido { background-color: #6c757d; }
+.badge-estado-En-revision, .badge-estado-En.revisión { background-color: #0dcaf0; color: #000; }
+.badge-estado-Asignado { background-color: #6f42c1; }
+.badge-estado-En-proceso { background-color: #0d6efd; }
+.badge-estado-Pendiente-de-informacion { background-color: #fd7e14; }
+.badge-estado-Resuelto { background-color: #198754; }
+.badge-estado-Cerrado { background-color: #343a40; }
+.badge-estado-Rechazado { background-color: #dc3545; }
+
+.dato-faltante {
+    color: #b02a37;
+    font-style: italic;
+}
+
+.hero-institucional {
+    background: linear-gradient(135deg, var(--aaa-azul) 0%, var(--aaa-verde) 100%);
+    color: #fff;
+    border-radius: 1rem;
+    padding: 2.5rem;
+}
+
+.badge-demo {
+    background-color: #ffc107;
+    color: #000;
+    font-weight: 600;
+}

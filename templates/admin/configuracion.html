@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title %}Configuración · TRIPLE AAA{% endblock %}
+{% block content %}
+<h3 class="mb-3">Configuración del sistema</h3>
+
+<div class="row g-3">
+    <div class="col-lg-6">
+        <div class="card card-institucional p-3 mb-3">
+            <h5>Estado de integraciones</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between">
+                    <span><i class="bi bi-whatsapp"></i> WhatsApp Business Platform</span>
+                    <span class="badge bg-{{ 'success' if whatsapp_configurado else 'secondary' }}">
+                        {{ 'Conectado' if whatsapp_configurado else 'No conectado' }}
+                    </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span><i class="bi bi-cash-coin"></i> SINFA (facturación)</span>
+                    <span class="badge bg-{{ 'success' if sinfa_estado.configurado else 'secondary' }}">
+                        {{ 'Conectado' if sinfa_estado.configurado else 'No conectado' }}
+                    </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span><i class="bi bi-box-seam"></i> GBS (inventario)</span>
+                    <span class="badge bg-{{ 'success' if gbs_estado.configurado else 'secondary' }}">
+                        {{ 'Conectado' if gbs_estado.configurado else 'No conectado' }}
+                    </span>
+                </li>
+            </ul>
+            <p class="text-muted small mt-2 mb-0">
+                Las credenciales se configuran mediante variables de entorno (ver archivo .env.example)
+                y nunca deben escribirse directamente en el código.
+            </p>
+        </div>
+
+        <div class="card card-institucional p-3">
+            <h5>Parámetros del sistema</h5>
+            <p class="text-muted small">Tiempos legales y textos configurables. Un valor vacío se muestra como "Dato faltante".</p>
+            <table class="table table-sm">
+                <thead><tr><th>Clave</th><th>Valor</th><th>Descripción</th></tr></thead>
+                <tbody>
+                {% for p in parametros %}
+                    <tr>
+                        <td>{{ p.clave }}</td>
+                        <td>{{ p.valor if p.valor else '—' }}</td>
+                        <td class="small text-muted">{{ p.descripcion or '' }}</td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="3" class="text-center text-muted">Sin parámetros configurados.</td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% if usuario_actual.rol == 'ADMINISTRADOR' %}
+            <form method="post" action="/admin/configuracion/parametro" class="row g-2 mt-2">
+                <div class="col-4"><input name="clave" class="form-control form-control-sm" placeholder="clave" required></div>
+                <div class="col-4"><input name="valor" class="form-control form-control-sm" placeholder="valor"></div>
+                <div class="col-4"><input name="descripcion" class="form-control form-control-sm" placeholder="descripción"></div>
+                <div class="col-12"><button class="btn btn-sm btn-primary mt-1">Guardar parámetro</button></div>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card card-institucional p-3">
+            <h5>Funcionarios del sistema</h5>
+            <table class="table table-sm">
+                <thead><tr><th>Nombre</th><th>Correo</th><th>Rol</th><th>Estado</th></tr></thead>
+                <tbody>
+                {% for f in funcionarios %}
+                    <tr>
+                        <td>{{ f.nombre_completo }}</td>
+                        <td>{{ f.correo }}</td>
+                        <td>{{ f.rol }}</td>
+                        <td><span class="badge bg-{{ 'success' if f.activo else 'secondary' }}">{{ 'Activo' if f.activo else 'Inactivo' }}</span></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            {% if usuario_actual.rol == 'ADMINISTRADOR' %}
+            <hr>
+            <h6>Crear funcionario</h6>
+            <form method="post" action="/admin/configuracion/funcionario" class="row g-2">
+                <div class="col-6"><input name="nombre_completo" class="form-control form-control-sm" placeholder="Nombre completo" required></div>
+                <div class="col-6"><input name="correo" type="email" class="form-control form-control-sm" placeholder="Correo" required></div>
+                <div class="col-4"><input name="telefono" class="form-control form-control-sm" placeholder="Teléfono"></div>
+                <div class="col-4">
+                    <select name="rol" class="form-select form-select-sm">
+                        {% for r in roles %}<option value="{{ r }}">{{ r }}</option>{% endfor %}
+                    </select>
+                </div>
+                <div class="col-4"><input name="password" type="password" class="form-control form-control-sm" placeholder="Contraseña" required></div>
+                <div class="col-12"><button class="btn btn-sm btn-primary mt-1">Crear funcionario</button></div>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

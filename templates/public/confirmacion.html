@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Radicado generado · TRIPLE AAA{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card card-institucional p-4 text-center">
+            {% if radicado %}
+            <i class="bi bi-check-circle-fill text-success fs-1 mb-3"></i>
+            <h4>Tu caso fue registrado exitosamente</h4>
+            <p class="text-muted">Guarda este número para hacer seguimiento a tu caso.</p>
+            <div class="display-6 fw-bold my-3">{{ radicado.numero_radicado }}</div>
+            <p><strong>Estado actual:</strong> <span class="badge badge-estado-{{ radicado.estado|replace(' ', '-') }}">{{ radicado.estado }}</span></p>
+            <p class="text-muted small">Fecha de radicación: {{ radicado.fecha_creacion.strftime('%Y-%m-%d %H:%M') }}</p>
+            <a href="/consultar-radicado?numero_radicado={{ radicado.numero_radicado }}" class="btn btn-outline-primary">
+                Consultar el estado de este radicado
+            </a>
+            {% else %}
+            <p class="text-danger">No fue posible recuperar el radicado generado.</p>
+            {% endif %}
+            <a href="/" class="btn btn-link mt-3">Volver al inicio</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

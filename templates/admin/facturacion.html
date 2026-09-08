@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Facturación · TRIPLE AAA{% endblock %}
+{% block content %}
+<h3 class="mb-3">Facturación y cartera</h3>
+
+<div class="alert alert-info small">
+    <i class="bi bi-info-circle"></i> Estructura preparada para ser alimentada desde SINFA.
+    Estado actual de la integración: <strong>{{ sinfa_estado.mensaje }}</strong>
+</div>
+
+<form class="card card-institucional p-3 mb-3" method="get">
+    <div class="row g-2">
+        <div class="col-md-8">
+            <label class="form-label small">Número de documento del usuario</label>
+            <input name="numero_documento" class="form-control" value="{{ numero_documento }}" required>
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100"><i class="bi bi-search"></i> Consultar</button>
+        </div>
+    </div>
+</form>
+
+{% if numero_documento and not usuario %}
+<div class="alert alert-warning">No se encontró un usuario con ese número de documento.</div>
+{% endif %}
+
+{% if usuario %}
+<div class="card card-institucional p-3 mb-3">
+    <h5>{{ usuario.nombre_completo }} · {{ usuario.tipo_documento }} {{ usuario.numero_documento }}</h5>
+
+    <h6 class="mt-3">Cartera</h6>
+    {% if cartera and cartera.saldo is not none %}
+        <p>Saldo: <strong>${{ "{:,.0f}".format(cartera.saldo) }}</strong> — Estado: {{ cartera.estado }}
+        <br><span class="text-muted small">Última actualización: {{ cartera.ultima_sincronizacion or 'Dato faltante' }}</span></p>
+    {% else %}
+        <p class="dato-faltante">Información no disponible actualmente.</p>
+    {% endif %}
+
+    <h6 class="mt-3">Facturas</h6>
+    {% if facturas %}
+    <table class="table table-sm">
+        <thead><tr><th>Periodo</th><th>Facturación</th><th>Vencimiento</th><th>Valor</th><th>Estado</th></tr></thead>
+        <tbody>
+        {% for f in facturas %}
+            <tr>
+                <td>{{ f.periodo or '—' }}</td>
+                <td>{{ f.fecha_facturacion or '—' }}</td>
+                <td>{{ f.fecha_vencimiento or '—' }}</td>
+                <td>{% if f.valor_total is not none %}${{ "{:,.0f}".format(f.valor_total) }}{% else %}<span class="dato-faltante">Dato faltante</span>{% endif %}</td>
+                <td>{{ f.estado or '—' }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="dato-faltante">Dato faltante.</p>
+    {% endif %}
+
+    <h6 class="mt-3">Consumos</h6>
+    {% if consumos %}
+    <table class="table table-sm">
+        <thead><tr><th>Periodo</th><th>Lectura anterior</th><th>Lectura actual</th><th>Consumo m³</th></tr></thead>
+        <tbody>
+        {% for c in consumos %}
+            <tr>
+                <td>{{ c.periodo or '—' }}</td>
+                <td>{{ c.lectura_anterior if c.lectura_anterior is not none else '—' }}</td>
+                <td>{{ c.lectura_actual if c.lectura_actual is not none else '—' }}</td>
+                <td>{% if c.consumo_m3 is not none %}{{ c.consumo_m3 }}{% else %}<span class="dato-faltante">Dato faltante</span>{% endif %}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="dato-faltante">Dato faltante.</p>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}{{ radicado.numero_radicado }} · TRIPLE AAA{% endblock %}
+{% block content %}
+<a href="/admin/radicados" class="btn btn-sm btn-outline-secondary mb-3"><i class="bi bi-arrow-left"></i> Volver</a>
+
+<div class="row g-3">
+    <div class="col-lg-7">
+        <div class="card card-institucional p-3 mb-3">
+            <h4>{{ radicado.numero_radicado }} {% if radicado.es_demo %}<span class="badge badge-demo">DATOS DE PRUEBA</span>{% endif %}</h4>
+            <p class="mb-1"><strong>Tipo:</strong> {{ radicado.tipo }}</p>
+            <p class="mb-1"><strong>Estado actual:</strong> <span class="badge badge-estado-{{ radicado.estado|replace(' ', '-') }}">{{ radicado.estado }}</span></p>
+            <p class="mb-1"><strong>Prioridad:</strong> {{ radicado.prioridad }}</p>
+            <p class="mb-1"><strong>Usuario:</strong> {{ radicado.usuario.nombre_completo if radicado.usuario else '—' }}
+                ({{ radicado.usuario.numero_documento if radicado.usuario else '—' }})</p>
+            <p class="mb-1"><strong>Canal de origen:</strong> {{ radicado.canal_origen }}</p>
+            <p class="mb-1"><strong>Creado:</strong> {{ radicado.fecha_creacion.strftime('%Y-%m-%d %H:%M') }}</p>
+            <p class="mb-1"><strong>Última actualización:</strong> {{ radicado.fecha_actualizacion.strftime('%Y-%m-%d %H:%M') }}</p>
+            {% if radicado.funcionario_asignado %}
+            <p class="mb-1"><strong>Funcionario asignado:</strong> {{ radicado.funcionario_asignado.nombre_completo }}</p>
+            {% endif %}
+            <hr>
+            <p><strong>Descripción:</strong><br>{{ radicado.descripcion }}</p>
+            {% if radicado.tipo == 'PQR' and radicado.pqr %}
+            <p><strong>Tipo PQR:</strong> {{ radicado.pqr.tipo_pqr }} — <strong>Asunto:</strong> {{ radicado.pqr.asunto }}</p>
+            {% endif %}
+            {% if radicado.tipo == 'DANO' and radicado.reporte_dano %}
+            <p><strong>Tipo de daño:</strong> {{ radicado.reporte_dano.tipo_dano }}<br>
+               <strong>Dirección:</strong> {{ radicado.reporte_dano.direccion }} ({{ radicado.reporte_dano.barrio or 'Sin barrio' }})</p>
+            {% endif %}
+            {% if radicado.respuesta %}
+            <hr><p><strong>Respuesta:</strong><br>{{ radicado.respuesta }}</p>
+            {% endif %}
+        </div>
+
+        <div class="card card-institucional p-3 mb-3">
+            <h5>Evidencias</h5>
+            {% if radicado.evidencias %}
+            <ul class="list-group list-group-flush">
+                {% for e in radicado.evidencias %}
+                <li class="list-group-item d-flex justify-content-between">
+                    <span><i class="bi bi-paperclip"></i> {{ e.nombre_archivo }}</span>
+                    <span class="text-muted small">{{ e.fecha_carga.strftime('%Y-%m-%d %H:%M') }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="text-muted mb-0">No se han cargado evidencias para este caso.</p>
+            {% endif %}
+        </div>
+
+        <div class="card card-institucional p-3">
+            <h5>Historial de trazabilidad</h5>
+            <ul class="list-group list-group-flush">
+                {% for h in radicado.historial %}
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                        <strong>{{ h.estado_anterior or 'Creación' }} → {{ h.estado_nuevo }}</strong>
+                        <span class="text-muted small">{{ h.fecha_hora.strftime('%Y-%m-%d %H:%M') }}</span>
+                    </div>
+                    {% if h.comentario %}<div class="small">{{ h.comentario }}</div>{% endif %}
+                    <div class="text-muted small">Por: {{ h.realizado_por }}</div>
+                </li>
+                {% else %}
+                <li class="list-group-item text-muted">Sin movimientos registrados.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="card card-institucional p-3">
+            <h5>Actualizar caso</h5>
+            <form method="post" action="/admin/radicados/{{ radicado.numero_radicado }}/estado">
+                <div class="mb-2">
+                    <label class="form-label">Nuevo estado</label>
+                    <select name="estado_nuevo" class="form-select">
+                        {% for e in estados %}<option value="{{ e }}" {% if e == radicado.estado %}selected{% endif %}>{{ e }}</option>{% endfor %}
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Funcionario asignado</label>
+                    <select name="funcionario_asignado_id" class="form-select">
+                        <option value="">Sin asignar</option>
+                        {% for f in funcionarios %}
+                        <option value="{{ f.id }}" {% if radicado.funcionario_asignado_id == f.id %}selected{% endif %}>{{ f.nombre_completo }} ({{ f.rol }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Comentario del cambio</label>
+                    <textarea name="comentario" class="form-control" rows="2"></textarea>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Respuesta al usuario</label>
+                    <textarea name="respuesta" class="form-control" rows="3">{{ radicado.respuesta or '' }}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Guardar cambios</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

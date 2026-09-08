@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Reportar daño · TRIPLE AAA{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card card-institucional p-4">
+            <h4 class="mb-3"><i class="bi bi-exclamation-diamond text-danger"></i> Reportar un daño</h4>
+            <form method="post" action="/reportar-dano" enctype="multipart/form-data">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Tipo de daño</label>
+                        <select name="tipo_dano" class="form-select" required>
+                            {% for t in tipos_dano %}<option value="{{ t }}">{{ t }}</option>{% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Servicio afectado</label>
+                        <select name="servicio_id" class="form-select">
+                            <option value="">No especifica</option>
+                            {% for s in servicios %}<option value="{{ s.id }}">{{ s.nombre }}</option>{% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label">Dirección</label>
+                        <input name="direccion" class="form-control" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Barrio</label>
+                        <input name="barrio" class="form-control">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Descripción del daño</label>
+                        <textarea name="descripcion" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Fotografía (opcional)</label>
+                        <input type="file" name="fotografia" class="form-control" accept="image/*,application/pdf">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Latitud (opcional)</label>
+                        <input name="latitud" class="form-control" id="lat">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Longitud (opcional)</label>
+                        <input name="longitud" class="form-control" id="lon">
+                    </div>
+                    <div class="col-12">
+                        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="obtenerUbicacion()">
+                            <i class="bi bi-geo-alt"></i> Usar mi ubicación actual
+                        </button>
+                    </div>
+                    <hr class="my-2">
+                    <h6>Datos de contacto</h6>
+                    <div class="col-md-4">
+                        <label class="form-label">Tipo doc.</label>
+                        <select name="tipo_documento" class="form-select">
+                            <option>CC</option><option>NIT</option><option>CE</option><option>TI</option><option>PA</option>
+                        </select>
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label">Número de documento</label>
+                        <input name="numero_documento" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Nombre completo</label>
+                        <input name="nombre_completo" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Teléfono</label>
+                        <input name="telefono" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Correo</label>
+                        <input name="correo" type="email" class="form-control">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-4">Registrar reporte</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+function obtenerUbicacion() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(pos) {
+            document.getElementById('lat').value = pos.coords.latitude;
+            document.getElementById('lon').value = pos.coords.longitude;
+        });
+    }
+}
+</script>
+{% endblock %}

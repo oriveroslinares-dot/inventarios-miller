@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · TRIPLE AAA{% endblock %}
+{% block content %}
+<h3 class="mb-4">Panel de control</h3>
+
+<div class="row g-3 mb-4">
+    <div class="col-6 col-md-3">
+        <div class="card card-institucional stat-card p-3">
+            <div class="text-muted small">PQR recibidas</div>
+            <div class="fs-3 fw-bold">{{ stats.pqr_total }}</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card card-institucional stat-card p-3">
+            <div class="text-muted small">PQR abiertas</div>
+            <div class="fs-3 fw-bold text-warning">{{ stats.pqr_abiertas }}</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card card-institucional stat-card p-3">
+            <div class="text-muted small">PQR en proceso</div>
+            <div class="fs-3 fw-bold text-primary">{{ stats.pqr_en_proceso }}</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card card-institucional stat-card p-3">
+            <div class="text-muted small">PQR cerradas</div>
+            <div class="fs-3 fw-bold text-success">{{ stats.pqr_cerradas }}</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-4">
+        <div class="card card-institucional stat-card p-3">
+            <div class="text-muted small">Daños reportados</div>
+            <div class="fs-3 fw-bold">{{ stats.danos_total }}</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-4">
+        <div class="card card-institucional stat-card p-3">
+            <div class="text-muted small">Daños pendientes</div>
+            <div class="fs-3 fw-bold text-warning">{{ stats.danos_pendientes }}</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-4">
+        <div class="card card-institucional stat-card p-3">
+            <div class="text-muted small">Solicitudes</div>
+            <div class="fs-3 fw-bold">{{ stats.solicitudes_total }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="card card-institucional p-3">
+    <h5>Radicados recientes</h5>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr><th>Radicado</th><th>Tipo</th><th>Estado</th><th>Fecha</th><th>Usuario</th><th></th></tr>
+            </thead>
+            <tbody>
+                {% for r in recientes %}
+                <tr>
+                    <td><strong>{{ r.numero_radicado }}</strong>{% if r.es_demo %} <span class="badge badge-demo">DEMO</span>{% endif %}</td>
+                    <td>{{ r.tipo }}</td>
+                    <td><span class="badge badge-estado-{{ r.estado|replace(' ', '-') }}">{{ r.estado }}</span></td>
+                    <td>{{ r.fecha_creacion.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td>{{ r.usuario.nombre_completo if r.usuario else '—' }}</td>
+                    <td><a href="/admin/radicados/{{ r.numero_radicado }}" class="btn btn-sm btn-outline-primary">Ver</a></td>
+                </tr>
+                {% else %}
+                <tr><td colspan="6" class="text-center text-muted">No hay radicados registrados todavía.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

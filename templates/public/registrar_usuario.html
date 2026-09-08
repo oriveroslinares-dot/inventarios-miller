@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Registrarme · TRIPLE AAA{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card card-institucional p-4">
+            <h4 class="mb-3"><i class="bi bi-person-plus"></i> Registrarme como usuario</h4>
+            {% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+            <form method="post" action="/registrar-usuario">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Tipo doc.</label>
+                        <select name="tipo_documento" class="form-select" required>
+                            <option>CC</option><option>NIT</option><option>CE</option><option>TI</option><option>PA</option>
+                        </select>
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label">Número de documento</label>
+                        <input name="numero_documento" class="form-control" required>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Nombre completo</label>
+                        <input name="nombre_completo" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Teléfono</label>
+                        <input name="telefono" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Correo</label>
+                        <input name="correo" type="email" class="form-control">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Dirección</label>
+                        <input name="direccion" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Municipio</label>
+                        <input name="municipio" class="form-control" value="Cartagenita">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Barrio</label>
+                        <input name="barrio" class="form-control">
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label">Tipo de usuario</label>
+                        <select name="tipo_usuario" class="form-select">
+                            {% for t in tipos_usuario %}<option value="{{ t }}">{{ t }}</option>{% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Estrato</label>
+                        <input name="estrato" type="number" min="1" max="6" class="form-control">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-4">Registrarme</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

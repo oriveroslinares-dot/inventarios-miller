@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Consultar radicado · TRIPLE AAA{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card card-institucional p-4">
+            <h4 class="mb-3"><i class="bi bi-search text-success"></i> Consultar un radicado</h4>
+            <form method="get" action="/consultar-radicado" class="row g-2">
+                <div class="col-9">
+                    <input name="numero_radicado" class="form-control" placeholder="Ej: PQR-2026-000001"
+                           value="{{ numero_radicado }}" required>
+                </div>
+                <div class="col-3">
+                    <button type="submit" class="btn btn-primary w-100">Consultar</button>
+                </div>
+            </form>
+
+            {% if buscado %}
+                {% if radicado %}
+                <hr>
+                <h5>{{ radicado.numero_radicado }}</h5>
+                <p class="mb-1"><strong>Tipo:</strong> {{ radicado.tipo }}</p>
+                <p class="mb-1"><strong>Servicio:</strong> {{ radicado.servicio.nombre if radicado.servicio else 'No especificado' }}</p>
+                <p class="mb-1"><strong>Estado:</strong> <span class="badge badge-estado-{{ radicado.estado|replace(' ', '-') }}">{{ radicado.estado }}</span></p>
+                <p class="mb-1"><strong>Fecha de creación:</strong> {{ radicado.fecha_creacion.strftime('%Y-%m-%d %H:%M') }}</p>
+                <p class="mb-1"><strong>Última actualización:</strong> {{ radicado.fecha_actualizacion.strftime('%Y-%m-%d %H:%M') }}</p>
+                <p class="mb-1"><strong>Funcionario asignado:</strong> {{ radicado.funcionario_asignado.nombre_completo if radicado.funcionario_asignado else 'Aún sin asignar' }}</p>
+                <p class="mb-1"><strong>Descripción:</strong> {{ radicado.descripcion[:200] }}{% if radicado.descripcion|length > 200 %}...{% endif %}</p>
+                <p class="mb-1"><strong>Respuesta:</strong> {{ radicado.respuesta or 'Aún no hay respuesta registrada.' }}</p>
+                {% else %}
+                <div class="alert alert-warning mt-3">No encontramos un radicado con ese número.</div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

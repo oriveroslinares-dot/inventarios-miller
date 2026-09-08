@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}Usuarios · TRIPLE AAA{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>Usuarios</h3>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUsuario">
+        <i class="bi bi-plus-circle"></i> Nuevo usuario
+    </button>
+</div>
+
+<div class="card card-institucional p-3">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Documento</th><th>Nombre</th><th>Teléfono</th><th>Tipo</th>
+                    <th>Estrato</th><th>Municipio</th><th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in usuarios %}
+                <tr>
+                    <td>{{ u.tipo_documento }} {{ u.numero_documento }}</td>
+                    <td>{{ u.nombre_completo }}{% if u.es_demo %} <span class="badge badge-demo">DEMO</span>{% endif %}</td>
+                    <td>{{ u.telefono or '—' }}</td>
+                    <td>{{ u.tipo_usuario }}</td>
+                    <td>{{ u.estrato or '—' }}</td>
+                    <td>{{ u.municipio or '—' }}</td>
+                    <td><span class="badge bg-{{ 'success' if u.estado == 'Activo' else 'secondary' }}">{{ u.estado }}</span></td>
+                </tr>
+                {% else %}
+                <tr><td colspan="7" class="text-center text-muted">No hay usuarios registrados todavía.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="modalUsuario" tabindex="-1">
+    <div class="modal-dialog">
+        <form method="post" action="/admin/usuarios" class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">Nuevo usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div class="row g-2">
+                    <div class="col-4">
+                        <label class="form-label">Tipo doc.</label>
+                        <select name="tipo_documento" class="form-select" required>
+                            <option>CC</option><option>NIT</option><option>CE</option><option>TI</option><option>PA</option>
+                        </select>
+                    </div>
+                    <div class="col-8">
+                        <label class="form-label">Número documento</label>
+                        <input name="numero_documento" class="form-control" required>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Nombre completo</label>
+                        <input name="nombre_completo" class="form-control" required>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Teléfono</label>
+                        <input name="telefono" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Correo</label>
+                        <input name="correo" type="email" class="form-control">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Dirección</label>
+                        <input name="direccion" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Municipio</label>
+                        <input name="municipio" class="form-control" value="Cartagenita">
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Barrio</label>
+                        <input name="barrio" class="form-control">
+                    </div>
+                    <div class="col-8">
+                        <label class="form-label">Tipo de usuario</label>
+                        <select name="tipo_usuario" class="form-select">
+                            {% for t in tipos_usuario %}<option value="{{ t }}">{{ t }}</option>{% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Estrato</label>
+                        <input name="estrato" type="number" min="1" max="6" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Inventario · TRIPLE AAA{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>Inventario</h3>
+    <form method="post" action="/admin/inventario/sincronizar">
+        <button type="submit" class="btn btn-outline-primary btn-sm">
+            <i class="bi bi-arrow-repeat"></i> Sincronizar con GBS
+        </button>
+    </form>
+</div>
+
+<div class="alert alert-info small">
+    <i class="bi bi-info-circle"></i> Estado de la integración: {{ gbs_estado.mensaje }}
+</div>
+
+<div class="card card-institucional p-3">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr><th>Código</th><th>Nombre</th><th>Categoría</th><th>Existencia</th><th>Costo promedio</th><th>Stock mínimo</th><th>Ubicación</th></tr>
+            </thead>
+            <tbody>
+                {% for p in productos %}
+                <tr>
+                    <td>{{ p.codigo }}</td>
+                    <td>{{ p.nombre }}{% if p.es_demo %} <span class="badge badge-demo">DEMO</span>{% endif %}</td>
+                    <td>{{ p.categoria }}</td>
+                    <td>
+                        {% if p.existencia is not none %}
+                            {{ p.existencia }} {{ p.unidad or '' }}
+                            {% if p.stock_minimo is not none and p.existencia <= p.stock_minimo %}
+                                <span class="badge bg-danger">Bajo mínimo</span>
+                            {% endif %}
+                        {% else %}
+                            <span class="dato-faltante">Dato faltante – pendiente de sincronización con GBS.</span>
+                        {% endif %}
+                    </td>
+                    <td>{% if p.costo_promedio is not none %}${{ "{:,.0f}".format(p.costo_promedio) }}{% else %}<span class="dato-faltante">Dato faltante</span>{% endif %}</td>
+                    <td>{{ p.stock_minimo if p.stock_minimo is not none else '—' }}</td>
+                    <td>{{ p.ubicacion or '—' }}</td>
+                </tr>
+                {% else %}
+                <tr><td colspan="7" class="text-center text-muted">No hay productos registrados todavía.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
