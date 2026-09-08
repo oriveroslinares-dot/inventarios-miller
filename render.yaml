@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: triple-aaa-cartagenita
+    runtime: python
+    plan: free
+    autoDeploy: false
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: LOAD_DEMO_DATA
+        value: "true"
+      - key: DATABASE_URL
+        value: "sqlite:////opt/render/project/src/triple_aaa.db"
+      - key: UPLOAD_DIR
+        value: "/opt/render/project/src/uploads"
+      - key: ENVIRONMENT
+        value: "demo"
