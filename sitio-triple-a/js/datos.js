@@ -15,6 +15,7 @@ window.TRIPLE_A = {
   whatsapp: "573157443635",        // POR CONFIRMAR que esta línea tenga WhatsApp
   correoPqrs: "pqrs@tripleafacatativa.com.co",
   correoGeneral: "aaacartagena@tripleafacatativa.com.co",
+  facebook: "https://www.facebook.com/p/Triple-A-del-Barrio-Cartagena-100083142559953/",
   horario: [
     "Lunes a viernes: 8:00 a. m. a 5:00 p. m.",
     "Sábados: 9:00 a. m. a 12:00 m."

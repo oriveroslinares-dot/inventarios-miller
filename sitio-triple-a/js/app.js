@@ -307,6 +307,7 @@
   $("#pie-dir").textContent = D.direccion;
   $("#pie-tel").textContent = D.telefono; $("#pie-tel").href = "tel:+57" + num(D.telefono);
   $("#pie-correo").textContent = D.correoGeneral; $("#pie-correo").href = "mailto:" + D.correoGeneral;
+  if (D.facebook) { ["#canal-fb", "#pie-fb"].forEach(function (s) { var a = $(s); a.href = D.facebook; a.hidden = false; }); }
   $("#anio").textContent = new Date().getFullYear();
 
   /* ---------- Formulario PQRS ---------- */
