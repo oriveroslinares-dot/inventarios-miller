@@ -1,0 +1,13 @@
+# Triple A del Barrio Cartagena
+# Mostrar primero la página nueva
+DirectoryIndex index.html index.php
+
+# No listar el contenido de las carpetas
+Options -Indexes
+
+# Bloquear desde internet los archivos con datos de usuarios y respaldos.
+# Los programas PHP del servidor los siguen leyendo normalmente.
+<FilesMatch "\.(json|bak|sql|log)$|^\.htaccess_viejo$|^index_backup">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

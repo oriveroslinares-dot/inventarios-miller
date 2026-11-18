@@ -62,7 +62,7 @@
     </section>
 
     <!-- Cinta con el último comunicado -->
-    <a class="cinta" href="#comunicados" id="cinta" hidden>
+    <a class="cinta con-ola" href="#comunicados" id="cinta" hidden>
       <span class="cinta__rotulo">Último comunicado</span>
       <span class="cinta__texto" id="cinta-texto"></span>
       <span class="cinta__fecha" id="cinta-fecha"></span>
@@ -128,9 +128,39 @@
       <div class="contenedor">
         <h2 id="t-servicios" class="titulo">Tres servicios, una factura</h2>
         <div class="servicios">
-          <article><h3>Acueducto</h3><p>Agua potable en cada predio, con controles de calidad y medición individual.</p></article>
-          <article><h3>Alcantarillado</h3><p>Redes que recogen las aguas residuales y lluvias. No arroje aceite ni basura a los sifones.</p></article>
-          <article><h3>Aseo</h3><p>Recolección de residuos y material aprovechable. Saque la bolsa solo el día que corresponde.</p>
+          <article class="servicio servicio--agua">
+            <svg class="servicio__ilus" viewBox="0 0 160 120" aria-hidden="true">
+              <circle cx="80" cy="64" r="50" class="s-fondo"/>
+              <path class="s-gota" d="M80 18c-14 20-28 34-28 52a28 28 0 0 0 56 0c0-18-14-32-28-52Z"/>
+              <path class="s-brillo" d="M66 66c0 9 5 16 13 18"/>
+              <path class="s-ola" d="M20 104c10-6 20-6 30 0s20 6 30 0 20-6 30 0 20 6 30 0"/>
+            </svg>
+            <h3>Acueducto</h3>
+            <p>Agua potable en cada predio, con controles de calidad y medición individual.</p>
+            <a class="servicio__link" href="#avisos">Ver calidad del agua</a>
+          </article>
+          <article class="servicio servicio--red">
+            <svg class="servicio__ilus" viewBox="0 0 160 120" aria-hidden="true">
+              <circle cx="80" cy="64" r="50" class="s-fondo"/>
+              <path class="s-tubo" d="M30 46h52a14 14 0 0 1 14 14v40"/>
+              <path class="s-tubo2" d="M30 46h52a14 14 0 0 1 14 14v40"/>
+              <rect x="22" y="36" width="12" height="20" rx="3" class="s-brida"/>
+              <rect x="86" y="96" width="20" height="10" rx="3" class="s-brida"/>
+              <circle cx="128" cy="40" r="5" class="s-burbuja"/><circle cx="116" cy="26" r="3.5" class="s-burbuja"/>
+            </svg>
+            <h3>Alcantarillado</h3>
+            <p>Redes que recogen las aguas residuales y lluvias. No arroje aceite ni basura a los sifones.</p>
+            <a class="servicio__link" href="#recorrido">Ver el recorrido del agua</a>
+          </article>
+          <article class="servicio servicio--aseo">
+            <svg class="servicio__ilus" viewBox="0 0 160 120" aria-hidden="true">
+              <circle cx="80" cy="64" r="50" class="s-fondo"/>
+              <path class="s-tapa" d="M50 40h60M70 40v-8h20v8"/>
+              <path class="s-caneca" d="M56 46h48l-5 56H61Z"/>
+              <path class="s-reciclar" d="M72 66l8-12 8 12M88 66l-4 10h-10M74 82l-6-8"/>
+            </svg>
+            <h3>Aseo</h3>
+            <p>Recolección de residuos y material aprovechable. Saque la bolsa solo el día que corresponde.</p>
             <ul class="recoleccion" id="recoleccion"></ul>
           </article>
         </div>
@@ -168,7 +198,7 @@
     </section>
 
     <!-- ===================== TARIFAS ===================== -->
-    <section class="seccion seccion--noche" id="tarifas" aria-labelledby="t-tarifas">
+    <section class="seccion seccion--noche con-ola" id="tarifas" aria-labelledby="t-tarifas">
       <div class="contenedor">
         <div class="cabeza-doble">
           <h2 id="t-tarifas" class="titulo">Tarifas vigentes</h2>
@@ -250,7 +280,7 @@
     </section>
   </main>
 
-  <footer class="pie">
+  <footer class="pie con-ola">
     <div class="contenedor pie__grilla">
       <div class="pie__marca">
         <img src="img/logo.png" alt="Triple A del Barrio Cartagena" width="600" height="534">
@@ -272,6 +302,21 @@
     </div>
     <p class="contenedor pie__legal">© <span id="anio"></span> Triple A del Barrio Cartagena. Facatativá, Cundinamarca.</p>
   </footer>
+
+  <div class="ayuda" id="ayuda">
+    <div class="ayuda__panel" id="ayuda-panel" role="dialog" aria-labelledby="ayuda-titulo" hidden>
+      <p class="ayuda__hola" id="ayuda-titulo">¡Hola, vecino! ¿En qué le ayudo?</p>
+      <a href="#pagar">Pagar mi factura</a>
+      <a href="#atencion">Reportar un daño</a>
+      <a href="#avisos">Ver cortes programados</a>
+      <a href="#documentos">Descargar documentos</a>
+      <a class="ayuda__wa" id="ayuda-wa" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+    </div>
+    <button class="ayuda__boton" id="ayuda-boton" aria-expanded="false" aria-controls="ayuda-panel">
+      <img src="img/mascota.png" alt="" width="64" height="64">
+      <span class="sr">Abrir menú de ayuda</span>
+    </button>
+  </div>
 
   <dialog class="dialogo" id="dialogo" aria-labelledby="dialogo-titulo">
     <form method="dialog"><button class="dialogo__cerrar" aria-label="Cerrar">×</button></form>

@@ -189,6 +189,20 @@
     });
   })();
 
+  /* ---------- Asistente flotante ---------- */
+  (function () {
+    var caja = $("#ayuda"), boton = $("#ayuda-boton"), panel = $("#ayuda-panel");
+    if (!caja) return;
+    $("#ayuda-wa").href = wa("Hola, Triple A. Necesito ayuda con ");
+    function mostrar() { caja.classList.toggle("visible", window.scrollY > window.innerHeight * 0.6); }
+    mostrar(); window.addEventListener("scroll", mostrar, { passive: true });
+    function abrir(si) { panel.hidden = !si; boton.setAttribute("aria-expanded", si); }
+    boton.addEventListener("click", function () { abrir(panel.hidden); });
+    panel.addEventListener("click", function (e) { if (e.target.closest("a")) abrir(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !panel.hidden) { abrir(false); boton.focus(); } });
+    document.addEventListener("click", function (e) { if (!panel.hidden && !caja.contains(e.target)) abrir(false); });
+  })();
+
   /* ---------- Recolección ---------- */
   $("#recoleccion").innerHTML = (D.recoleccion || []).map(function (r) { return "<li><b>" + esc(r.dia) + "</b>" + esc(r.tipo) + "</li>"; }).join("");
 
