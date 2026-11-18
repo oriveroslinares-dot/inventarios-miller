@@ -189,6 +189,30 @@
     });
   })();
 
+  /* ---------- Publicaciones de Facebook (plugin oficial) ---------- */
+  (function () {
+    var sec = $("#facebook"), marco = $("#fb-marco");
+    if (!sec || !D.facebook) return;
+    sec.hidden = false;
+    $("#fb-seguir").href = D.facebook; $("#fb-respaldo-link").href = D.facebook;
+    var puesto = false;
+    function cargar() {
+      if (puesto) return; puesto = true;
+      var ancho = Math.max(180, Math.min(500, Math.floor(marco.clientWidth)));
+      var src = "https://www.facebook.com/plugins/page.php?href=" + encodeURIComponent(D.facebook) +
+        "&tabs=timeline&width=" + ancho + "&height=700&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&locale=es_LA";
+      var f = document.createElement("iframe");
+      f.src = src; f.title = "Publicaciones de Triple A en Facebook"; f.loading = "lazy";
+      f.setAttribute("allow", "encrypted-media; clipboard-write; web-share");
+      f.addEventListener("load", function () { f.classList.add("listo"); $("#fb-cargando").hidden = true; });
+      marco.insertBefore(f, marco.firstChild);
+    }
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { cargar(); io.disconnect(); } }, { rootMargin: "600px 0px" });
+      io.observe(sec);
+    } else cargar();
+  })();
+
   /* ---------- Asistente flotante ---------- */
   (function () {
     var caja = $("#ayuda"), boton = $("#ayuda-boton"), panel = $("#ayuda-panel");

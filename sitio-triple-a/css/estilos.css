@@ -243,6 +243,22 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .dialogo__texto p + p { margin-top: 1rem; }
 .dialogo .boton { margin-top: 1.8rem; }
 
+/* ---------- Facebook ---------- */
+.facebook__grilla { display: grid; grid-template-columns: 1fr minmax(0, 500px); gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+.facebook__texto { position: sticky; top: 7rem; }
+.boton--fb { margin-top: 2rem; background: #1877F2; color: #fff; }
+.boton--fb:hover { background: #0f5fd0; }
+.boton--fb svg { width: 22px; height: 22px; fill: currentColor; }
+.facebook__marco { position: relative; min-height: 640px; border-radius: 16px; background: #fff; box-shadow: 0 30px 60px -40px rgb(6 33 74 / .55); overflow: hidden; display: grid; }
+.facebook__marco iframe { grid-area: 1 / 1; width: 100%; height: 700px; border: 0; display: block; opacity: 0; transition: opacity .6s; }
+.facebook__marco iframe.listo { opacity: 1; }
+.facebook__cargando { grid-area: 1 / 1; display: grid; place-content: center; justify-items: center; gap: 1rem; color: var(--gris); }
+.facebook__gota { width: 34px; height: 44px; background: var(--agua); border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; clip-path: polygon(50% 0, 100% 55%, 100% 100%, 0 100%, 0 55%); animation: gotear 1.2s ease-in-out infinite; }
+@keyframes gotear { 50% { transform: translateY(8px) scaleY(.9); opacity: .6; } }
+.facebook__respaldo { grid-column: 2; margin-top: -1rem; font-size: .95rem; color: var(--gris); }
+.facebook__respaldo a { color: var(--hondo); font-weight: 700; }
+@media (max-width: 1000px) { .facebook__grilla { grid-template-columns: 1fr; } .facebook__texto { position: static; } .facebook__respaldo { grid-column: 1; max-width: 500px; width: 100%; margin-inline: auto; } .facebook__marco { max-width: 500px; width: 100%; margin-inline: auto; } }
+
 /* ---------- Tarifas ---------- */
 .pestanas { display: flex; gap: .4rem; margin-bottom: 1.2rem; }
 .pestana { font: 700 1rem var(--texto); padding: .7rem 1.2rem; border-radius: 6px; border: 1.5px solid rgb(255 255 255 / .25); background: none; color: #fff; cursor: pointer; }
