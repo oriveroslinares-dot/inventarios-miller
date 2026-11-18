@@ -20,6 +20,18 @@ window.TRIPLE_A = {
     "Sábados: 9:00 a. m. a 12:00 m."
   ],
 
+  // ---------- PAGOS ----------
+  // Complete los números reales. Si un medio no aplica, bórrelo de la lista.
+  // Si "numero" queda vacío, la página le indica al usuario que lo pida en la oficina.
+  pagos: {
+    enlacePSE: "",                 // POR CONFIRMAR: enlace del botón PSE de su banco (déjelo vacío si no tiene)
+    medios: [
+      { id: "nequi", nombre: "Nequi", detalle: "Número celular", numero: "", titular: "" },          // POR CONFIRMAR
+      { id: "bancolombia", nombre: "Bancolombia", detalle: "Cuenta de ahorros", numero: "", titular: "" } // POR CONFIRMAR
+    ],
+    fechaLimite: "Pague antes de la fecha límite impresa en su factura para evitar intereses de mora y la suspensión del servicio."
+  },
+
   // ---------- ESTADO DEL SERVICIO ----------
   // estado: "normal" | "programado" | "interrumpido"
   estado: "normal",

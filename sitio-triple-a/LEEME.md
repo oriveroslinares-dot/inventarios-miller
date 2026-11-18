@@ -46,7 +46,14 @@ Abra `js/datos.js` y revise todo lo marcado **POR CONFIRMAR**:
    ```
 4. Guarde. El documento aparece en el Centro de documentos, con buscador y filtro.
 
-## 4. Publicar un comunicado o un corte de agua
+## 4. Datos de pago (sección "Pague su factura aquí")
+
+En `js/datos.js`, bloque `pagos`:
+- `enlacePSE`: pegue el enlace del botón PSE que le da su banco. Si lo deja vacío, la opción PSE no aparece.
+- `medios`: escriba el número de Nequi y la cuenta de Bancolombia, con el titular. Si un medio no aplica, borre esa línea.
+  Si deja un número vacío, la página le pide al usuario que lo solicite en la línea de atención.
+
+## 5. Publicar un comunicado o un corte de agua
 
 Edite `js/datos.js`:
 - **Comunicado:** agregue un bloque en `comunicados`. El más reciente aparece en la cinta azul bajo la portada.

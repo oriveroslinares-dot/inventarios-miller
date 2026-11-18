@@ -31,7 +31,7 @@
       <a href="#comunicados">Comunicados</a>
       <a href="#tarifas">Tarifas</a>
       <a href="#atencion">Atención</a>
-      <a class="nav__cta" href="#atencion">Radicar PQRS</a>
+      <a class="nav__cta" href="#pagar">Pagar factura</a>
     </nav>
   </header>
 
@@ -50,8 +50,8 @@
         <div class="portada__pie" data-entra>
           <p class="portada__bajada">Acueducto, alcantarillado y aseo para los hogares del Barrio Cartagena.</p>
           <div class="portada__botones">
-            <a class="boton boton--agua" href="#documentos">Ver documentos</a>
-            <a class="boton boton--borde" href="#atencion">Reportar un daño</a>
+            <a class="boton boton--agua" href="#pagar">Pagar mi factura</a>
+            <a class="boton boton--borde" href="#documentos">Ver documentos</a>
           </div>
         </div>
       </div>
@@ -67,6 +67,37 @@
       <span class="cinta__texto" id="cinta-texto"></span>
       <span class="cinta__fecha" id="cinta-fecha"></span>
     </a>
+
+    <!-- ===================== PAGUE SU FACTURA ===================== -->
+    <section class="seccion pagar" id="pagar" aria-labelledby="t-pagar">
+      <div class="contenedor pagar__grilla">
+        <div class="pagar__cabeza">
+          <h2 id="t-pagar" class="titulo">Pague su factura aquí</h2>
+          <p class="intro">Sin filas y desde el celular. Siga los tres pasos y su pago queda registrado a su nombre.</p>
+          <p class="pagar__limite" id="pago-limite"></p>
+        </div>
+        <form class="pago" id="pago" novalidate>
+          <div class="pago__paso" data-paso="1">
+            <h3><span>1</span>Datos de su factura</h3>
+            <div class="doble">
+              <label>Código de suscriptor<input name="codigo" inputmode="numeric" autocomplete="off" placeholder="Está arriba en su factura"></label>
+              <label>Valor a pagar<span class="pago__moneda"><input name="valor" inputmode="numeric" autocomplete="off" placeholder="0"></span></label>
+            </div>
+          </div>
+          <div class="pago__paso" data-paso="2">
+            <h3><span>2</span>Elija cómo pagar</h3>
+            <div class="medios" id="medios" role="radiogroup" aria-label="Medio de pago"></div>
+            <div class="medio__detalle" id="medio-detalle" aria-live="polite"></div>
+          </div>
+          <div class="pago__paso" data-paso="3">
+            <h3><span>3</span>Envíe su comprobante</h3>
+            <p class="pago__ayuda">Tome una foto o captura del comprobante y envíela con su código. Así aplicamos el pago a su cuenta.</p>
+            <p class="error" id="pago-error" role="alert" hidden></p>
+            <button class="boton boton--agua pago__enviar" type="submit">Enviar comprobante por WhatsApp</button>
+          </div>
+        </form>
+      </div>
+    </section>
 
     <!-- ===================== RECORRIDO DEL AGUA ===================== -->
     <section class="recorrido" id="recorrido" aria-labelledby="t-recorrido">

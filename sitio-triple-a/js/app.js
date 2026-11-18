@@ -108,6 +108,87 @@
   window.addEventListener("scroll", avanzar, { passive: true });
   window.addEventListener("resize", avanzar);
 
+  /* ---------- Pague su factura ---------- */
+  (function () {
+    var P = D.pagos || {}, form = $("#pago"), cont = $("#medios"), det = $("#medio-detalle"), errP = $("#pago-error");
+    if (!form) return;
+    $("#pago-limite").textContent = P.fechaLimite || "";
+    var medios = [];
+    if (P.enlacePSE) medios.push({ id: "pse", nombre: "PSE", detalle: "Débito desde su banco", enlace: P.enlacePSE });
+    (P.medios || []).forEach(function (m) { medios.push(m); });
+    medios.push({ id: "oficina", nombre: "Oficina", detalle: "Efectivo, en persona" });
+    var elegido = null;
+    cont.innerHTML = medios.map(function (m, i) {
+      return '<button type="button" class="medio" role="radio" aria-checked="false" data-i="' + i + '"><b>' + esc(m.nombre) + "</b><small>" + esc(m.detalle) + "</small></button>";
+    }).join("");
+    var dato = function (rotulo, valor, copiable) {
+      return '<div class="dato"><div><small>' + esc(rotulo) + "</small><b>" + esc(valor) + "</b></div>" +
+        (copiable ? '<button type="button" class="copiar" data-copiar="' + esc(valor) + '">Copiar</button>' : "") + "</div>";
+    };
+    function valorTexto() { var v = num(form.elements.valor.value); return v ? "$" + (+v).toLocaleString("es-CO") : ""; }
+    function pintarMedio() {
+      var m = elegido, h = "";
+      if (!m) { det.innerHTML = ""; return; }
+      if (m.id === "pse") {
+        h = '<p class="medio__nota">Será dirigido a la página segura de PSE para pagar desde su cuenta bancaria. Escriba su código de suscriptor como referencia.</p>' +
+          '<a class="boton boton--agua" href="' + esc(m.enlace) + '" target="_blank" rel="noopener">Ir a pagar con PSE</a>';
+      } else if (m.id === "oficina") {
+        h = dato("Dirección", D.direccion) + dato("Horario", (D.horario || []).join(". ")) +
+          '<p class="medio__nota">Lleve su factura o su código de suscriptor. En la oficina le entregan el comprobante; no necesita enviarlo por WhatsApp.</p>';
+      } else if (m.numero) {
+        h = dato(m.detalle, m.numero, true) + (m.titular ? dato("A nombre de", m.titular) : "") + (valorTexto() ? dato("Valor a enviar", valorTexto(), false) : "") +
+          '<p class="medio__nota">En la descripción de la transferencia escriba su código de suscriptor.</p>';
+      } else {
+        h = '<p class="medio__nota">Estamos actualizando los datos de ' + esc(m.nombre) + ". Solicítelos en la línea " + esc(D.telefono) + " o pague en la oficina.</p>";
+      }
+      det.innerHTML = h;
+    }
+    function revisar() {
+      var p1 = num(form.elements.codigo.value).length > 0 && num(form.elements.valor.value).length > 0;
+      form.querySelector('[data-paso="1"]').classList.toggle("listo", p1);
+      form.querySelector('[data-paso="2"]').classList.toggle("listo", !!elegido);
+    }
+    cont.addEventListener("click", function (e) {
+      var b = e.target.closest(".medio"); if (!b) return;
+      cont.querySelectorAll(".medio").forEach(function (x) { x.setAttribute("aria-checked", x === b); });
+      elegido = medios[+b.dataset.i]; pintarMedio(); revisar();
+    });
+    cont.addEventListener("keydown", function (e) {
+      if (["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp"].indexOf(e.key) < 0) return;
+      var bs = Array.prototype.slice.call(cont.querySelectorAll(".medio")), i = bs.indexOf(document.activeElement);
+      if (i < 0) return; e.preventDefault();
+      var n = bs[(i + (e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : bs.length - 1)) % bs.length]; n.focus(); n.click();
+    });
+    form.elements.valor.addEventListener("input", function (e) {
+      var v = num(e.target.value); e.target.value = v ? (+v).toLocaleString("es-CO") : ""; revisar();
+      if (elegido && elegido.numero) pintarMedio();
+    });
+    form.elements.codigo.addEventListener("input", revisar);
+    form.addEventListener("input", function (e) { e.target.removeAttribute("aria-invalid"); });
+    var unir = function (xs) { return xs.length > 1 ? xs.slice(0, -1).join(", ") + " y " + xs[xs.length - 1] : xs[0]; };
+    det.addEventListener("click", function (e) {
+      var b = e.target.closest(".copiar"); if (!b) return;
+      var listo = function () { b.textContent = "Copiado"; b.classList.add("copiado"); setTimeout(function () { b.textContent = "Copiar"; b.classList.remove("copiado"); }, 1800); };
+      if (navigator.clipboard) navigator.clipboard.writeText(b.dataset.copiar).then(listo, listo); else listo();
+    });
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      form.querySelectorAll("[aria-invalid]").forEach(function (x) { x.removeAttribute("aria-invalid"); });
+      var faltan = [];
+      if (!num(form.elements.codigo.value)) faltan.push(["codigo", "su código de suscriptor"]);
+      if (!num(form.elements.valor.value)) faltan.push(["valor", "el valor pagado"]);
+      if (!elegido) faltan.push([null, "el medio de pago"]);
+      if (faltan.length) {
+        faltan.forEach(function (f) { if (f[0]) form.elements[f[0]].setAttribute("aria-invalid", "true"); });
+        errP.textContent = "Para enviar el comprobante, indique " + unir(faltan.map(function (f) { return f[1]; })) + ".";
+        errP.hidden = false; (faltan[0][0] ? form.elements[faltan[0][0]] : cont.querySelector(".medio")).focus(); return;
+      }
+      errP.hidden = true;
+      window.open(wa("Hola, Triple A. Pagué mi factura.\nCódigo de suscriptor: " + num(form.elements.codigo.value) +
+        "\nValor: " + valorTexto() + "\nMedio de pago: " + elegido.nombre + "\nAdjunto el comprobante."), "_blank", "noopener");
+    });
+  })();
+
   /* ---------- Recolección ---------- */
   $("#recoleccion").innerHTML = (D.recoleccion || []).map(function (r) { return "<li><b>" + esc(r.dia) + "</b>" + esc(r.tipo) + "</li>"; }).join("");
 
