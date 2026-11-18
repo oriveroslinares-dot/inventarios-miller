@@ -1,0 +1,2 @@
+Suba aquí los PDF con los nombres exactos que aparecen en js/datos.js (campo "archivo").
+Ejemplo: estados-financieros-2025.pdf
