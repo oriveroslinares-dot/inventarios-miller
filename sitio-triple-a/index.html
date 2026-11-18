@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Triple A del Barrio Cartagena | Acueducto, alcantarillado y aseo en Facatativá</title>
+  <meta name="description" content="Empresa de servicios públicos del Barrio Cartagena, Facatativá. Pague su factura, reporte daños, consulte cortes programados y la calidad del agua.">
+  <meta name="theme-color" content="#0A3D91">
+  <meta property="og:title" content="Triple A del Barrio Cartagena">
+  <meta property="og:description" content="Acueducto, alcantarillado y aseo para el Barrio Cartagena, Facatativá.">
+  <meta property="og:image" content="img/logo.png">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <a class="saltar" href="#contenido">Ir al contenido</a>
+
+  <header class="barra">
+    <a class="barra__marca" href="#inicio" aria-label="Triple A del Barrio Cartagena, inicio">
+      <img src="img/mascota.png" alt="" width="44" height="44">
+      <span><strong>Triple A</strong> del Barrio Cartagena</span>
+    </a>
+    <button class="barra__menu" aria-expanded="false" aria-controls="nav">Menú</button>
+    <nav id="nav" class="barra__nav" aria-label="Principal">
+      <a href="#servicios">Servicios</a>
+      <a href="#pagos">Pagos</a>
+      <a href="#avisos">Cortes y avisos</a>
+      <a href="#reportar">Reportar o solicitar</a>
+      <a href="#transparencia">Transparencia</a>
+      <a class="barra__cta" href="#pagos">Pagar factura</a>
+    </nav>
+  </header>
+
+  <main id="contenido">
+    <!-- ===== HERO: el agua parte el titular ===== -->
+    <section class="hero" id="inicio" aria-labelledby="titulo-hero">
+      <div class="hero__capa hero__seco">
+        <div class="hero__marco">
+          <p class="hero__lugar">Facatativá, Cundinamarca</p>
+          <h1 id="titulo-hero" class="hero__titulo">Agua para el Barrio Cartagena</h1>
+          <img class="hero__mascota" src="img/mascota.png" alt="Mascota de Triple A: una gota de agua sonriente" width="485" height="485">
+        </div>
+      </div>
+      <div class="hero__capa hero__mojado" aria-hidden="true">
+        <div class="hero__marco">
+          <p class="hero__lugar">Facatativá, Cundinamarca</p>
+          <p class="hero__titulo">Agua para el Barrio Cartagena</p>
+          <img class="hero__mascota" src="img/mascota.png" alt="" width="485" height="485">
+        </div>
+      </div>
+      <div class="hero__acciones">
+        <p class="hero__bajada">Acueducto, alcantarillado y aseo administrados por y para la comunidad.</p>
+        <div class="hero__botones">
+          <a class="boton boton--verde" href="#pagos">Pagar mi factura</a>
+          <a class="boton boton--blanco" href="#reportar">Reportar un daño</a>
+          <a class="boton boton--linea" href="#avisos">Ver cortes programados</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ESTADO DEL SERVICIO ===== -->
+    <section class="estado" aria-live="polite">
+      <div class="contenedor estado__fila">
+        <span class="estado__punto" data-estado="normal"></span>
+        <p><strong class="estado__titulo">Servicio normal</strong> <span class="estado__mensaje">El servicio de acueducto funciona con normalidad.</span></p>
+        <a class="estado__link" href="#avisos">Ver avisos</a>
+      </div>
+    </section>
+
+    <!-- ===== SERVICIOS ===== -->
+    <section class="seccion" id="servicios" aria-labelledby="t-servicios">
+      <div class="contenedor">
+        <h2 id="t-servicios" class="titulo-seccion">Tres servicios, una sola cuenta</h2>
+        <p class="intro">Somos la empresa comunitaria que lleva el agua a cada casa del barrio, recoge las aguas usadas y mantiene limpias nuestras calles.</p>
+
+        <div class="servicios">
+          <article class="servicio">
+            <svg class="servicio__icono" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4C17 14 10 21 10 29a14 14 0 0 0 28 0c0-8-7-15-14-25Z"/></svg>
+            <h3>Acueducto</h3>
+            <p>Captamos, tratamos y distribuimos agua apta para el consumo humano a cada predio del barrio, con controles de calidad mensuales.</p>
+          </article>
+          <article class="servicio">
+            <svg class="servicio__icono" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 14h36v8H6zM10 22h6v20h-6zM32 22h6v20h-6zM16 30h16v6H16z"/></svg>
+            <h3>Alcantarillado</h3>
+            <p>Mantenemos las redes que recogen las aguas residuales y lluvias. No arroje aceite, grasa ni basura a los sifones: taponan la red de todos.</p>
+          </article>
+          <article class="servicio">
+            <svg class="servicio__icono" viewBox="0 0 48 48" aria-hidden="true"><path d="M14 12h20l-2 32H16zM10 8h28v4H10zM20 4h8v4h-8z"/></svg>
+            <h3>Aseo</h3>
+            <p>Recolección de residuos en los días fijados para cada tipo de bolsa. Separe en la fuente y saque la bolsa solo el día de recolección.</p>
+          </article>
+        </div>
+
+        <div class="recoleccion">
+          <h3>Días de recolección</h3>
+          <ul id="lista-recoleccion" class="recoleccion__lista"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PAGOS ===== -->
+    <section class="seccion seccion--cielo" id="pagos" aria-labelledby="t-pagos">
+      <div class="contenedor pagos">
+        <div>
+          <h2 id="t-pagos" class="titulo-seccion">Pague su factura sin filas</h2>
+          <ol class="pasos">
+            <li>
+              <h3>Busque su código de suscriptor</h3>
+              <p>Está en la parte superior de su factura. Lo necesita para que el pago quede a su nombre.</p>
+            </li>
+            <li>
+              <h3>Elija dónde pagar</h3>
+              <p>En la oficina o por transferencia. Pague antes de la fecha límite para evitar recargos y suspensión.</p>
+            </li>
+            <li>
+              <h3>Guarde el comprobante</h3>
+              <p>Si paga por transferencia, envíenos la foto del comprobante por WhatsApp con su código.</p>
+            </li>
+          </ol>
+        </div>
+        <aside class="pagos__puntos" aria-labelledby="t-puntos">
+          <h3 id="t-puntos">Puntos de pago</h3>
+          <ul id="lista-puntos"></ul>
+          <a class="boton boton--verde boton--ancho" id="wa-pago" href="#" target="_blank" rel="noopener">Enviar comprobante por WhatsApp</a>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===== CALCULADORA ===== -->
+    <section class="seccion" id="consumo" aria-labelledby="t-consumo">
+      <div class="contenedor calculadora">
+        <div class="calculadora__texto">
+          <h2 id="t-consumo" class="titulo-seccion">¿Cuánta agua usa su casa?</h2>
+          <p class="intro">Mueva los controles y vea un cálculo aproximado de su consumo mensual. En Facatativá, por estar a más de 2.000 metros de altura, el consumo básico subsidiable es de 11 m³ al mes por suscriptor.</p>
+        </div>
+        <form class="calculadora__panel" id="calc" onsubmit="return false">
+          <label>Personas en la casa <output id="o-personas">4</output>
+            <input type="range" id="personas" min="1" max="10" value="4">
+          </label>
+          <label>Minutos de ducha por persona al día <output id="o-ducha">8</output>
+            <input type="range" id="ducha" min="2" max="20" value="8">
+          </label>
+          <label>Lavadas de ropa por semana <output id="o-ropa">3</output>
+            <input type="range" id="ropa" min="0" max="10" value="3">
+          </label>
+          <div class="tanque" aria-hidden="true"><div class="tanque__agua" id="tanque-agua"></div><div class="tanque__basico"></div></div>
+          <p class="calculadora__resultado"><span id="r-m3">0</span> m³ al mes</p>
+          <p class="calculadora__nota" id="r-nota"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===== AVISOS ===== -->
+    <section class="seccion seccion--hondo" id="avisos" aria-labelledby="t-avisos">
+      <div class="contenedor">
+        <h2 id="t-avisos" class="titulo-seccion">Cortes programados y avisos</h2>
+        <p class="intro">Publicamos aquí cada suspensión con anticipación. Si su casa se queda sin agua y no hay aviso, repórtelo.</p>
+        <ul class="avisos" id="lista-avisos"></ul>
+      </div>
+    </section>
+
+    <!-- ===== CALIDAD ===== -->
+    <section class="seccion" id="calidad" aria-labelledby="t-calidad">
+      <div class="contenedor calidad">
+        <div>
+          <h2 id="t-calidad" class="titulo-seccion">Calidad del agua</h2>
+          <p class="intro">El IRCA (Índice de Riesgo de la Calidad del Agua) mide si el agua es apta para tomar. Entre 0 % y 5 % significa sin riesgo.</p>
+        </div>
+        <div class="calidad__medidor" id="medidor">
+          <div class="medidor__escala" aria-hidden="true">
+            <span>Sin riesgo</span><span>Bajo</span><span>Medio</span><span>Alto</span>
+          </div>
+          <div class="medidor__barra"><div class="medidor__aguja" id="aguja"></div></div>
+          <p class="medidor__valor" id="irca-valor"></p>
+          <p class="medidor__fuente" id="irca-fuente"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PQRS ===== -->
+    <section class="seccion seccion--cielo" id="reportar" aria-labelledby="t-reportar">
+      <div class="contenedor pqrs">
+        <div class="pqrs__texto">
+          <h2 id="t-reportar" class="titulo-seccion">Reportar un daño o hacer una solicitud</h2>
+          <p class="intro">Peticiones, quejas, reclamos y sugerencias. Por ley, respondemos en máximo 15 días hábiles.</p>
+          <div class="urgente">
+            <h3>¿Fuga en la calle o tubo roto?</h3>
+            <p>Llame de inmediato a la línea de daños:</p>
+            <a class="urgente__tel" id="tel-danos" href="#">—</a>
+          </div>
+        </div>
+        <form class="formulario" id="form-pqrs" novalidate>
+          <fieldset class="formulario__tipo">
+            <legend>¿Qué necesita?</legend>
+            <label><input type="radio" name="tipo" value="Reporte de daño" checked> Reportar daño</label>
+            <label><input type="radio" name="tipo" value="Petición"> Petición</label>
+            <label><input type="radio" name="tipo" value="Queja"> Queja</label>
+            <label><input type="radio" name="tipo" value="Reclamo"> Reclamo</label>
+            <label><input type="radio" name="tipo" value="Sugerencia"> Sugerencia</label>
+          </fieldset>
+          <div class="formulario__doble">
+            <label>Nombre completo<input name="nombre" required autocomplete="name"></label>
+            <label>Código de suscriptor<input name="codigo" inputmode="numeric" placeholder="Opcional"></label>
+          </div>
+          <div class="formulario__doble">
+            <label>Dirección<input name="direccion" required autocomplete="street-address"></label>
+            <label>Teléfono<input name="telefono" type="tel" required autocomplete="tel"></label>
+          </div>
+          <label>Describa la situación<textarea name="mensaje" rows="5" required></textarea></label>
+          <p class="formulario__error" id="form-error" role="alert" hidden></p>
+          <div class="formulario__acciones">
+            <button class="boton boton--hondo" type="submit" name="via" value="whatsapp">Enviar por WhatsApp</button>
+            <button class="boton boton--linea-oscura" type="submit" name="via" value="correo">Enviar por correo</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===== AHORRO ===== -->
+    <section class="seccion" id="ahorro" aria-labelledby="t-ahorro">
+      <div class="contenedor">
+        <h2 id="t-ahorro" class="titulo-seccion">Cuide el agua, cuide su factura</h2>
+        <ul class="consejos">
+          <li><strong>Cierre la llave al cepillarse.</strong> Ahorra hasta 12 litros cada vez.</li>
+          <li><strong>Revise el sanitario.</strong> Unas gotas de colorante en el tanque: si el color pasa a la taza sin descargar, hay fuga.</li>
+          <li><strong>Lave con la lavadora llena.</strong> Media carga gasta casi la misma agua que una completa.</li>
+          <li><strong>Reutilice el agua de lavado</strong> para el baño o los pisos.</li>
+          <li><strong>Revise su medidor de noche.</strong> Si con todo cerrado sigue girando, tiene una fuga interna.</li>
+          <li><strong>Riegue temprano o al atardecer.</strong> Con menos sol, se evapora menos.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== TRANSPARENCIA ===== -->
+    <section class="seccion seccion--cielo" id="transparencia" aria-labelledby="t-transparencia">
+      <div class="contenedor transparencia">
+        <div>
+          <h2 id="t-transparencia" class="titulo-seccion">Transparencia</h2>
+          <p class="intro">Documentos públicos de la empresa, como lo exige la Ley 1712 de 2014 de transparencia y acceso a la información.</p>
+          <p class="intro">Somos vigilados por la <a href="https://www.superservicios.gov.co" target="_blank" rel="noopener">Superintendencia de Servicios Públicos Domiciliarios</a>.</p>
+        </div>
+        <ul class="documentos" id="lista-documentos"></ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== PIE ===== -->
+  <footer class="pie">
+    <div class="contenedor pie__grilla">
+      <div>
+        <img class="pie__logo" src="img/logo.png" alt="Triple A del Barrio Cartagena" width="600" height="534">
+      </div>
+      <div>
+        <h2>Oficina</h2>
+        <p id="pie-direccion"></p>
+        <p id="pie-horario"></p>
+      </div>
+      <div>
+        <h2>Contacto</h2>
+        <p><a id="pie-tel" href="#"></a></p>
+        <p><a id="pie-correo" href="#"></a></p>
+        <p><a id="pie-wa" href="#" target="_blank" rel="noopener">Escríbanos por WhatsApp</a></p>
+      </div>
+      <iframe class="pie__mapa" title="Mapa del Barrio Cartagena, Facatativá" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q=Barrio+Cartagena,+Facatativ%C3%A1,+Cundinamarca&output=embed"></iframe>
+    </div>
+    <p class="pie__legal contenedor">© <span id="anio"></span> Triple A del Barrio Cartagena, Facatativá. Empresa comunitaria de servicios públicos domiciliarios.</p>
+  </footer>
+
+  <script src="js/datos.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
