@@ -107,6 +107,19 @@ window.TRIPLE_A = {
   noticias: [
     {
       tipo: "Comunicado",
+      fecha: "2026-11-19",
+      titulo: "Publicamos las tarifas vigentes 2026",
+      resumen: "Las tarifas de acueducto, alcantarillado y aseo se ajustaron un 4,77 % por el IPC, desde el período de facturación julio–agosto de 2026.",
+      texto: [
+        "Informamos a los suscriptores que las tarifas de acueducto, alcantarillado y aseo vigentes a partir del período de facturación julio–agosto de 2026 tienen un incremento del 4,77 %, igual a la variación del Índice de Precios al Consumidor (IPC) de enero a junio de 2026 certificada por el DANE, como lo establece el artículo 125 de la Ley 142 de 1994.",
+        "Los porcentajes de subsidio para los estratos 1 y 2 y de contribución para los usuarios comerciales e industriales, fijados por el Acuerdo Municipal de Facatativá 2022-2026, no cambian.",
+        "Puede consultar todas las tarifas en la sección Tarifas de esta página o descargar el documento completo."
+      ],
+      facebook: "",
+      archivo: "documentos/tarifas-vigentes-2026.pdf"
+    },
+    {
+      tipo: "Comunicado",
       fecha: "2026-05-12",
       titulo: "No hay incremento en la tarifa de aprovechamiento",
       resumen: "Aclaramos a la comunidad que actualmente no se está aplicando ningún aumento en el cobro de aprovechamiento.",
@@ -140,34 +153,69 @@ window.TRIPLE_A = {
     { titulo: "Estados financieros 2025", categoria: "Estados financieros", fecha: "2026-03-31", archivo: "documentos/estados-financieros-2025.pdf", descripcion: "Estado de situación financiera, estado de resultados y notas." },
     { titulo: "Estados financieros 2024", categoria: "Estados financieros", fecha: "2025-03-31", archivo: "documentos/estados-financieros-2024.pdf", descripcion: "Estado de situación financiera, estado de resultados y notas." },
     { titulo: "Informe de gestión 2025", categoria: "Informes de gestión", fecha: "2026-03-31", archivo: "documentos/informe-gestion-2025.pdf", descripcion: "Resultados del año, inversiones y metas." },
-    { titulo: "Estructura tarifaria periodo 02 de 2026", categoria: "Tarifas", fecha: "2026-02-01", archivo: "documentos/tarifas-2026-02.pdf", descripcion: "Cargos fijos y por consumo por uso y estrato." },
+    { titulo: "Tarifas vigentes 2026: acueducto, alcantarillado y aseo", categoria: "Tarifas", fecha: "2026-11-19", archivo: "documentos/tarifas-vigentes-2026.pdf", descripcion: "Vigentes desde el período julio–agosto de 2026. Ajuste del 4,77 % por IPC." },
     { titulo: "Acta de asamblea general 2026", categoria: "Asambleas", fecha: "2026-03-28", archivo: "documentos/acta-asamblea-2026.pdf", descripcion: "Decisiones de la asamblea de socios suscriptores." },
     { titulo: "Contrato de condiciones uniformes", categoria: "Normatividad", fecha: "2025-01-15", archivo: "documentos/contrato-condiciones-uniformes.pdf", descripcion: "Derechos y deberes de usuarios y empresa." },
     { titulo: "Estatutos de la asociación", categoria: "Normatividad", fecha: "2024-06-01", archivo: "documentos/estatutos.pdf", descripcion: "Reglas de funcionamiento de la asociación." }
   ],
 
-  // ---------- TARIFAS (periodo 02 de 2026) ----------
-  // Valores en pesos. Cargo fijo: $/mes. Consumos: $/m³. Use null si no tiene el dato.
-  // POR CONFIRMAR: el nombre de cada servicio y completar los valores faltantes.
-  periodoTarifas: "Periodo 02 de 2026",
+  // ---------- TARIFAS VIGENTES 2026 ----------
+  // Fuente: "Tarifas vigentes 2026" (documentos/tarifas-vigentes-2026.pdf), publicado en noviembre de 2026.
+  // En las filas, use null en "básico" cuando la categoría paga tarifa única por m³ (sin tramos).
   tarifas: {
-    "Acueducto": [
-      { uso: "Residencial estrato 1", fijo: 11164.00, basico: 1292.57, complementario: null, suntuario: null },
-      { uso: "Residencial estrato 2", fijo: null, basico: null, complementario: null, suntuario: null },
-      { uso: "Residencial estrato 3", fijo: null, basico: null, complementario: null, suntuario: null },
-      { uso: "Comercial", fijo: null, basico: null, complementario: null, suntuario: null },
-      { uso: "Oficial", fijo: null, basico: null, complementario: null, suntuario: null },
-      { uso: "Industrial", fijo: null, basico: null, complementario: null, suntuario: null },
-      { uso: "Especial", fijo: null, basico: null, complementario: null, suntuario: null }
+    vigencia: "A partir del período de facturación julio–agosto de 2026",
+    ajuste: "Incremento del 4,77 %, igual a la variación del IPC de enero a junio de 2026 certificada por el DANE (Ley 142 de 1994, art. 125). Los porcentajes de subsidio y contribución del Acuerdo Municipal de Facatativá 2022-2026 no cambian.",
+    pdf: "documentos/tarifas-vigentes-2026.pdf",
+    acueducto: {
+      filas: [
+        ["Residencial", 12292.52, 1423.29, 2587.80],
+        ["Comercial", 34419.06, null, 3881.70],
+        ["Oficial", 16390.03, null, 2587.80],
+        ["Industrial", 63522.05, null, 4406.84],
+        ["Especial", 16390.03, null, 2587.80]
+      ],
+      referencia: "Costo de referencia del servicio: cargo fijo $16.390,03 y consumo $2.587,80/m³ (industrial: $27.030,66 y $3.389,86/m³)."
+    },
+    alcantarillado: {
+      filas: [
+        ["Residencial", 4891.50, 748.77, 1497.54],
+        ["Comercial", 16305.01, null, 2246.31],
+        ["Oficial", 6522.01, null, 1497.54],
+        ["Industrial", 20218.22, null, 1946.80],
+        ["Especial", 6522.01, null, 1497.54]
+      ],
+      referencia: "Costo de referencia del servicio: cargo fijo $6.522,01 y consumo $1.497,54/m³."
+    },
+    aseo: {
+      filas: [
+        ["Residencial estrato 1", 37064.37, "Subsidio 43,89 %"],
+        ["Residencial estrato 2", 47427.28, "Subsidio 25,08 %"],
+        ["Residencial estrato 3", 57956.87, "Sin subsidio"],
+        ["Residencial estrato 4", 60082.18, "Sin subsidio"],
+        ["Sin recolección puerta a puerta, estrato 1", 30638.01, "Subsidio 43,89 %"],
+        ["Desocupado residencial, estrato 1", 15949.37, "Subsidio 43,89 %"],
+        ["Desocupado residencial, estrato 2", 18458.84, "Subsidio 25,08 %"],
+        ["Comercial", 97690.39, "Contribución 50 %"],
+        ["Desocupado comercial", 36433.50, "Contribución 50 %"],
+        ["Industrial", 88301.02, "Contribución 30 %"],
+        ["Especial 1", 359255.61, "Sin subsidio"],
+        ["Especial 2", 1338053.93, "Sin subsidio"],
+        ["Especial 3", 2271237.51, "Sin subsidio"],
+        ["Especial 4", 60424.08, "Sin subsidio"]
+      ],
+      referencia: "El servicio de aseo es un valor fijo por categoría (barrido, recolección, transporte, disposición final y aprovechamiento). Metodología Resolución CRA 853 de 2018."
+    },
+    comoLeer: [
+      "La facturación es bimestral. El cargo fijo se paga en cada factura, aunque no haya consumo.",
+      "Consumo básico: los primeros 22 m³ del período (11 m³ por mes, Resolución CRA 750 de 2016). Solo este tramo tiene subsidio para los usuarios residenciales.",
+      "Desde 22 m³ en adelante (complementario y suntuario) se paga el valor completo, sin subsidio.",
+      "Comercial, oficial, industrial y especial pagan una tarifa única por metro cúbico, sin tramos."
     ],
-    "Alcantarillado": [
-      { uso: "Residencial estrato 1", fijo: 4442.25, basico: 680.00, complementario: null, suntuario: null },
-      { uso: "Residencial estrato 2", fijo: null, basico: null, complementario: null, suntuario: null },
-      { uso: "Residencial estrato 3", fijo: null, basico: null, complementario: null, suntuario: null },
-      { uso: "Comercial", fijo: null, basico: null, complementario: null, suntuario: null },
-      { uso: "Oficial", fijo: null, basico: null, complementario: null, suntuario: null },
-      { uso: "Industrial", fijo: null, basico: null, complementario: null, suntuario: null },
-      { uso: "Especial", fijo: null, basico: null, complementario: null, suntuario: null }
+    informacion: [
+      "Subsidio: descuento sobre el costo del servicio para los estratos 1 y 2. Contribución: valor adicional que pagan los usuarios comerciales e industriales para financiar esos subsidios. Los porcentajes los fija el Concejo Municipal de Facatativá.",
+      "Las tarifas solo se vuelven a ajustar cuando el IPC acumule una variación de por lo menos el 3 % (Ley 142 de 1994, art. 125). Cualquier nuevo ajuste se publicará antes de aplicarse.",
+      "Los usuarios industriales aforados (facturados por tonelada) reciben su liquidación por separado.",
+      "Los valores están en pesos colombianos. No incluyen otros cobros como reconexión, intereses de mora o cuotas de financiación."
     ]
   },
 

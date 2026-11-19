@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/estilos.css?v=20261119f">
+  <link rel="stylesheet" href="css/estilos.css?v=20261119g">
   <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
@@ -251,6 +251,13 @@
         </div>
         <dl class="cifras" id="cifras"></dl>
 
+        <figure class="instalaciones">
+          <img src="img/instalaciones-900.webp" srcset="img/instalaciones-900.webp 900w, img/instalaciones-1600.webp 1600w" sizes="(max-width: 1000px) 100vw, 1216px"
+            width="1600" height="513" loading="lazy" decoding="async"
+            alt="Vista panorámica de la oficina de Triple A del Barrio Cartagena: puestos de atención, archivo, cartelera y punto ecológico.">
+          <figcaption><b>Nuestras instalaciones.</b> <span id="instalaciones-texto">Visítenos en la oficina del barrio.</span></figcaption>
+        </figure>
+
         <div class="gobierno">
           <article class="representante" id="representante"></article>
           <div class="junta">
@@ -318,17 +325,27 @@
     <section class="seccion seccion--noche con-ola" id="tarifas" aria-labelledby="t-tarifas">
       <div class="contenedor">
         <div class="cabeza-doble">
-          <h2 id="t-tarifas" class="titulo">Tarifas vigentes</h2>
-          <p class="intro"><span id="periodo"></span>. Cargo fijo mensual y valor por metro cúbico consumido. Las tarifas siguen la metodología de la Comisión de Regulación de Agua Potable (CRA).</p>
+          <h2 id="t-tarifas" class="titulo">Tarifas vigentes 2026</h2>
+          <div>
+            <p class="intro"><b class="tarifas__vigencia" id="tarifa-vigencia"></b></p>
+            <p class="intro" id="tarifa-ajuste"></p>
+          </div>
         </div>
-        <div class="pestanas" role="tablist" id="tarifa-pestanas"></div>
-        <div class="tabla-scroll">
+        <div class="tarifas__barra">
+          <div class="pestanas" role="tablist" id="tarifa-pestanas" aria-label="Servicio"></div>
+          <a class="boton boton--agua tarifas__pdf" id="tarifa-pdf" href="#" download hidden>Descargar tarifas (PDF)</a>
+        </div>
+        <div class="tabla-scroll" role="tabpanel" id="tarifa-panel">
           <table class="tabla" id="tarifa-tabla">
-            <thead><tr><th scope="col">Uso</th><th scope="col">Cargo fijo</th><th scope="col">Consumo básico</th><th scope="col">Complementario</th><th scope="col">Suntuario</th></tr></thead>
+            <thead></thead>
             <tbody></tbody>
           </table>
         </div>
-        <p class="nota">Valores en pesos colombianos. El consumo básico residencial en Facatativá es de 11 m³ al mes; lo que supere ese límite se cobra a tarifa complementaria.</p>
+        <p class="nota" id="tarifa-referencia"></p>
+        <div class="tarifas__info">
+          <div><h3>Cómo leer estas tablas</h3><ul id="tarifa-como"></ul></div>
+          <div><h3>Información para el usuario</h3><ul id="tarifa-info"></ul></div>
+        </div>
       </div>
     </section>
 
@@ -454,7 +471,7 @@
        Si cambia app.js o estilos.css, suba también el número de versión (v=). */
     (function () {
       var t = Math.floor(Date.now() / 600000);
-      ["js/datos.js?t=" + t, "js/app.js?v=20261119f"].forEach(function (src) {
+      ["js/datos.js?t=" + t, "js/app.js?v=20261119g"].forEach(function (src) {
         var s = document.createElement("script"); s.src = src; s.async = false; document.body.appendChild(s);
       });
     })();

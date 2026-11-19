@@ -536,25 +536,52 @@
     $("#nosotros-fuente").textContent = fuente.join(" ");
   })();
 
-  /* ---------- Tarifas ---------- */
-  $("#periodo").textContent = D.periodoTarifas || "Tarifas vigentes";
-  var servicios = Object.keys(D.tarifas || {});
-  var pest = $("#tarifa-pestanas");
-  pest.innerHTML = servicios.map(function (s, i) {
-    return '<button type="button" role="tab" class="pestana" aria-selected="' + (i === 0) + '" data-s="' + esc(s) + '">' + esc(s) + "</button>";
-  }).join("");
-  var pesos = function (v) { return v == null ? '<span class="vacio">Por publicar</span>' : "$" + v.toLocaleString("es-CO", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
-  function pintarTarifa(s) {
-    $("#tarifa-tabla tbody").innerHTML = (D.tarifas[s] || []).map(function (f) {
-      return '<tr><th scope="row">' + esc(f.uso) + "</th><td>" + pesos(f.fijo) + "</td><td>" + pesos(f.basico) + "</td><td>" + pesos(f.complementario) + "</td><td>" + pesos(f.suntuario) + "</td></tr>";
+  /* ---------- Tarifas vigentes ---------- */
+  (function () {
+    var T = D.tarifas || {};
+    var SERV = [["acueducto", "Acueducto"], ["alcantarillado", "Alcantarillado"], ["aseo", "Aseo"]].filter(function (x) { return T[x[0]]; });
+    if (!SERV.length) return;
+    $("#tarifa-vigencia").textContent = T.vigencia || "";
+    $("#tarifa-ajuste").textContent = T.ajuste || "";
+    if (T.pdf) { var pdf = $("#tarifa-pdf"); pdf.href = T.pdf; pdf.hidden = false; }
+    $("#tarifa-como").innerHTML = (T.comoLeer || []).map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("");
+    $("#tarifa-info").innerHTML = (T.informacion || []).map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("");
+    var pest = $("#tarifa-pestanas");
+    pest.innerHTML = SERV.map(function (x, i) {
+      return '<button type="button" role="tab" class="pestana" aria-controls="tarifa-panel" aria-selected="' + (i === 0) + '" data-s="' + x[0] + '">' + x[1] + "</button>";
     }).join("");
-  }
-  pest.addEventListener("click", function (e) {
-    var b = e.target.closest(".pestana"); if (!b) return;
-    pest.querySelectorAll(".pestana").forEach(function (x) { x.setAttribute("aria-selected", x === b); });
-    conTransicion(function () { pintarTarifa(b.dataset.s); });
-  });
-  if (servicios.length) pintarTarifa(servicios[0]);
+    var pesos = function (v) { return "$" + Number(v).toLocaleString("es-CO", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
+    function pintar(clave) {
+      var t = T[clave], thead, filas;
+      if (clave === "aseo") {
+        thead = '<tr><th scope="col">Categoría</th><th scope="col">Tarifa por período</th><th scope="col" class="condicion">Condición</th></tr>';
+        filas = t.filas.map(function (f) {
+          var tipo = /subsidio \d/i.test(f[2]) ? " chip-cond--sub" : /contribuci/i.test(f[2]) ? " chip-cond--con" : "";
+          return '<tr><th scope="row">' + esc(f[0]) + '</th><td data-label="Tarifa por período">' + pesos(f[1]) + '</td><td class="condicion" data-label="Condición"><span class="chip-cond' + tipo + '">' + esc(f[2]) + "</span></td></tr>";
+        });
+      } else {
+        thead = '<tr><th scope="col">Categoría</th><th scope="col">Cargo fijo<small>por período</small></th><th scope="col">Consumo básico<small>0 a 22 m³, por m³</small></th><th scope="col">Desde 22 m³<small>por m³</small></th></tr>';
+        filas = t.filas.map(function (f) {
+          var consumo = f[2] == null
+            ? '<td colspan="2" class="unica" data-label="Consumo (tarifa única)">' + pesos(f[3]) + "<small>tarifa única por m³</small></td>"
+            : '<td data-label="Consumo básico (0 a 22 m³)">' + pesos(f[2]) + '</td><td data-label="Desde 22 m³">' + pesos(f[3]) + "</td>";
+          return '<tr><th scope="row">' + esc(f[0]) + '</th><td data-label="Cargo fijo por período">' + pesos(f[1]) + "</td>" + consumo + "</tr>";
+        });
+      }
+      $("#tarifa-tabla thead").innerHTML = thead;
+      $("#tarifa-tabla tbody").innerHTML = filas.join("");
+      $("#tarifa-referencia").textContent = t.referencia || "";
+    }
+    pest.addEventListener("click", function (e) {
+      var b = e.target.closest(".pestana"); if (!b) return;
+      pest.querySelectorAll(".pestana").forEach(function (x) { x.setAttribute("aria-selected", x === b); });
+      conTransicion(function () { pintar(b.dataset.s); });
+    });
+    pintar(SERV[0][0]);
+  })();
+
+  /* ---------- Foto de instalaciones ---------- */
+  if ($("#instalaciones-texto") && D.direccion) $("#instalaciones-texto").textContent = "Visítenos en la " + D.direccion + "." + ((D.horario || []).length ? " Horario: " + D.horario.join("; ") : "");
 
   /* ---------- Avisos ---------- */
   var hoy = new Date(); hoy.setHours(0, 0, 0, 0);

@@ -438,6 +438,44 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .tabla .vacio { color: rgb(255 255 255 / .35); }
 .nota { margin-top: 1.2rem; font-size: .95rem; color: #b9d3ec; max-width: 70ch; }
 
+/* ---------- Tarifas 2026 ---------- */
+.tarifas__vigencia { color: #fff; }
+.tarifas__barra { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.2rem; }
+.tarifas__barra .pestanas { margin-bottom: 0; flex-wrap: wrap; }
+.tarifas__pdf { padding: .75rem 1.2rem; }
+.tabla th small { display: block; font-size: .78rem; font-weight: 400; opacity: .8; margin-top: .15rem; }
+.tabla td small { display: block; font-size: .8rem; color: var(--agua-claro); font-weight: 400; }
+.tabla td.unica { text-align: center; }
+.tabla .condicion { text-align: left; }
+.tabla .chip-cond { display: inline-block; font-size: .85rem; font-weight: 700; padding: .2rem .6rem; border-radius: 999px; background: rgb(255 255 255 / .1); color: #dbeeff; }
+.tabla .chip-cond--sub { background: rgb(70 176 46 / .22); color: #C9F1BD; }
+.tabla .chip-cond--con { background: rgb(240 169 46 / .22); color: #FFE1A8; }
+.tarifas__info { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 3rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgb(255 255 255 / .15); }
+.tarifas__info h3 { font-size: 1.25rem; font-variation-settings: "wdth" 104; color: #fff; margin-bottom: .8rem; }
+.tarifas__info ul { display: grid; gap: .7rem; }
+.tarifas__info li { position: relative; padding-left: 1.3rem; color: #b9d3ec; font-size: 1rem; }
+.tarifas__info li::before { content: ""; position: absolute; left: 0; top: .6em; width: 8px; height: 8px; border-radius: 50%; background: var(--agua); }
+@media (max-width: 1000px) { .tarifas__info { grid-template-columns: 1fr; } }
+@media (max-width: 720px) {
+  .tarifas__pdf { width: 100%; }
+  /* En celular cada categoría se muestra como una tarjeta */
+  #tarifa-tabla { min-width: 0; }
+  #tarifa-tabla thead { display: none; }
+  #tarifa-tabla tr { display: block; padding: .9rem 1rem; border-bottom: 1px solid rgb(255 255 255 / .12); }
+  #tarifa-tabla th[scope="row"] { display: block; padding: 0 0 .5rem; border: 0; font-size: 1.05rem; }
+  #tarifa-tabla td { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: .3rem 0; border: 0; text-align: right; }
+  #tarifa-tabla td::before { content: attr(data-label); color: #9fc0e0; font-size: .9rem; text-align: left; }
+  #tarifa-tabla td.unica small { display: none; }
+  #tarifa-tabla .condicion { text-align: right; }
+}
+
+/* ---------- Foto de instalaciones ---------- */
+.instalaciones { margin: 0 0 3rem; }
+.instalaciones img { width: 100%; height: auto; aspect-ratio: 1600 / 513; object-fit: cover; border-radius: 20px; box-shadow: 0 30px 60px -40px rgb(6 33 74 / .6); }
+.instalaciones figcaption { margin-top: .8rem; color: var(--gris); font-size: .98rem; }
+.instalaciones figcaption b { color: var(--hondo); }
+@media (max-width: 720px) { .instalaciones img { aspect-ratio: 4 / 3; object-position: 55% center; } }
+
 /* ---------- Avisos y calidad ---------- */
 .avisos-calidad { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(2.5rem, 6vw, 6rem); }
 .avisos { margin-top: 2rem; display: grid; gap: 1rem; }
