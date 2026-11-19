@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/estilos.css?v=20261119d">
+  <link rel="stylesheet" href="css/estilos.css?v=20261119e">
   <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
@@ -208,13 +208,21 @@
     </section>
 
     <!-- ===================== GALERÍA: TRABAJANDO EN EL BARRIO ===================== -->
-    <section class="seccion galeria" id="galeria" aria-labelledby="t-galeria" hidden>
+    <section class="seccion galeria" id="galeria" aria-labelledby="t-galeria">
       <div class="contenedor">
         <div class="cabeza-doble">
           <h2 id="t-galeria" class="titulo">Trabajando en el barrio</h2>
           <p class="intro">El mantenimiento que no se ve, pero que mantiene el agua llegando y las calles limpias. Toque una foto para verla en grande.</p>
         </div>
-        <ul class="galeria__lista" id="galeria-lista"></ul>
+        <ul class="galeria__lista" id="galeria-lista">
+          <!-- Contenido de respaldo: se ve aunque el JavaScript no cargue. app.js lo reemplaza con la lista de datos.js -->
+          <li class="galeria__item destacada">
+            <a class="foto" href="img/galeria/mantenimiento-alcantarillado-900.webp" target="_blank" rel="noopener">
+              <span class="foto__marco"><img src="img/galeria/mantenimiento-alcantarillado-600.webp" alt="Mantenimiento de la red de alcantarillado" width="600" height="1067" decoding="async"><span class="foto__etiqueta">Alcantarillado</span></span>
+              <span class="foto__texto"><span class="foto__titulo">Mantenimiento de la red de alcantarillado</span><span class="foto__desc">Limpieza de pozos y tuberías con equipo de succión a presión, para evitar taponamientos y reboses en las calles del barrio.</span><span class="foto__ver">Ver foto completa</span></span>
+            </a>
+          </li>
+        </ul>
       </div>
     </section>
 
@@ -430,7 +438,7 @@
        Si cambia app.js o estilos.css, suba también el número de versión (v=). */
     (function () {
       var t = Math.floor(Date.now() / 600000);
-      ["js/datos.js?t=" + t, "js/app.js?v=20261119d"].forEach(function (src) {
+      ["js/datos.js?t=" + t, "js/app.js?v=20261119e"].forEach(function (src) {
         var s = document.createElement("script"); s.src = src; s.async = false; document.body.appendChild(s);
       });
     })();
