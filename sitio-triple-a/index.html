@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/estilos.css?v=20261119">
   <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
@@ -132,8 +132,8 @@
         <h2 id="t-servicios" class="titulo">Tres servicios, una factura</h2>
         <div class="servicios">
           <article class="servicio servicio--agua">
-            <svg class="servicio__ilus" viewBox="0 0 160 120" aria-hidden="true">
-              <circle cx="80" cy="64" r="50" class="s-fondo"/>
+            <svg class="servicio__ilus" viewBox="0 0 160 120" width="150" height="112" fill="none" aria-hidden="true">
+              <circle cx="80" cy="64" r="50" class="s-fondo" fill="#fff"/>
               <path class="s-gota" d="M80 18c-14 20-28 34-28 52a28 28 0 0 0 56 0c0-18-14-32-28-52Z"/>
               <path class="s-brillo" d="M66 66c0 9 5 16 13 18"/>
               <path class="s-ola" d="M20 104c10-6 20-6 30 0s20 6 30 0 20-6 30 0 20 6 30 0"/>
@@ -143,8 +143,8 @@
             <a class="servicio__link" href="#avisos">Ver calidad del agua</a>
           </article>
           <article class="servicio servicio--red">
-            <svg class="servicio__ilus" viewBox="0 0 160 120" aria-hidden="true">
-              <circle cx="80" cy="64" r="50" class="s-fondo"/>
+            <svg class="servicio__ilus" viewBox="0 0 160 120" width="150" height="112" fill="none" aria-hidden="true">
+              <circle cx="80" cy="64" r="50" class="s-fondo" fill="#fff"/>
               <path class="s-tubo" d="M30 46h52a14 14 0 0 1 14 14v40"/>
               <path class="s-tubo2" d="M30 46h52a14 14 0 0 1 14 14v40"/>
               <rect x="22" y="36" width="12" height="20" rx="3" class="s-brida"/>
@@ -156,8 +156,8 @@
             <a class="servicio__link" href="#recorrido">Ver el recorrido del agua</a>
           </article>
           <article class="servicio servicio--aseo">
-            <svg class="servicio__ilus" viewBox="0 0 160 120" aria-hidden="true">
-              <circle cx="80" cy="64" r="50" class="s-fondo"/>
+            <svg class="servicio__ilus" viewBox="0 0 160 120" width="150" height="112" fill="none" aria-hidden="true">
+              <circle cx="80" cy="64" r="50" class="s-fondo" fill="#fff"/>
               <path class="s-tapa" d="M50 40h60M70 40v-8h20v8"/>
               <path class="s-caneca" d="M56 46h48l-5 56H61Z"/>
               <path class="s-reciclar" d="M72 66l8-12 8 12M88 66l-4 10h-10M74 82l-6-8"/>
@@ -169,7 +169,7 @@
         </div>
 
         <aside class="aseo-banda" aria-labelledby="t-aseo-banda">
-          <svg class="aseo-banda__ilus" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="56"/><path d="M60 22c-13 0-24 11-24 24 0 18 24 46 24 46s24-28 24-46c0-13-11-24-24-24Z"/><circle cx="60" cy="46" r="9"/></svg>
+          <svg class="aseo-banda__ilus" viewBox="0 0 120 120" width="84" height="84" aria-hidden="true"><circle cx="60" cy="60" r="56" fill="#3D8A30"/><path d="M60 22c-13 0-24 11-24 24 0 18 24 46 24 46s24-28 24-46c0-13-11-24-24-24Z" fill="#fff"/><circle cx="60" cy="46" r="9" fill="#1F6B14"/></svg>
           <div>
             <h3 id="t-aseo-banda">Aseo para todo Facatativá</h3>
             <p>No importa en qué barrio viva: el servicio de aseo es de libre competencia y usted puede elegir quién se lo presta. Pásese a Triple A y únase a los más de <b data-suscriptores-aseo>2.800</b> suscriptores que ya confían en nosotros.</p>
@@ -178,21 +178,31 @@
         </aside>
 
         <figure class="rutas" id="rutas">
-          <figcaption class="rutas__texto">
-            <h3>Rutas de recolección en el barrio</h3>
-            <p>Dos rutas recorren el Barrio Cartagenita los lunes, miércoles y viernes desde las 6:00 a. m. La ruta 1 (verde) cubre el sector norte y oriente; la ruta 2 (azul), el occidente y el sur.</p>
-            <p class="rutas__consejo">Saque la bolsa poco antes de que pase el carro, nunca la noche anterior.</p>
-            <div class="rutas__botones">
-              <button type="button" class="boton boton--linea" id="rutas-ampliar">Ver mapa en grande</button>
-              <a class="boton boton--linea" href="img/rutas-aseo.jpg" download="rutas-recoleccion-aseo-cartagenita.jpg">Descargar mapa</a>
+          <figcaption class="rutas__cabeza">
+            <div>
+              <h3>Rutas de recolección en el barrio</h3>
+              <p>Dos rutas recorren el Barrio Cartagenita los lunes, miércoles y viernes desde las 6:00 a. m. Acérquese al mapa para ver su calle.</p>
+            </div>
+            <div class="rutas__acciones">
+              <button type="button" class="ruta-btn ruta-btn--1" data-ruta="1" aria-pressed="false"><span></span>Ruta 1 <small>norte y oriente</small></button>
+              <button type="button" class="ruta-btn ruta-btn--2" data-ruta="2" aria-pressed="false"><span></span>Ruta 2 <small>occidente y sur</small></button>
+              <a class="ruta-btn ruta-btn--bajar" href="img/rutas-aseo.jpg" download="rutas-recoleccion-aseo-cartagenita.jpg">Descargar</a>
             </div>
           </figcaption>
-          <button type="button" class="rutas__mapa" id="rutas-mapa" aria-label="Ampliar el mapa de rutas de recolección">
-            <img src="img/rutas-aseo-800.webp" srcset="img/rutas-aseo-800.webp 1000w, img/rutas-aseo.webp 1672w" sizes="(max-width: 1000px) 100vw, 760px"
-              width="1672" height="941" loading="lazy" decoding="async"
-              alt="Mapa de rutas de recolección de aseo del Barrio Cartagenita en Facatativá: ruta 1 en verde por el sector norte y oriente, ruta 2 en azul por el sector occidente y sur. Lunes, miércoles y viernes desde las 6:00 a. m., 457 suscriptores en el barrio.">
-            <span class="rutas__lupa" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4M11 8v6M8 11h6"/></svg></span>
-          </button>
+          <div class="mapa" id="mapa" tabindex="0" role="application" aria-roledescription="mapa ampliable" aria-label="Mapa de rutas de recolección. Use las teclas más y menos para acercar y las flechas para moverse.">
+            <div class="mapa__lienzo" id="mapa-lienzo">
+              <img src="img/rutas-aseo.webp" width="1672" height="941" decoding="async" draggable="false"
+                alt="Mapa de rutas de recolección de aseo del Barrio Cartagenita en Facatativá: ruta 1 en verde por el sector norte y oriente, ruta 2 en azul por el sector occidente y sur. Lunes, miércoles y viernes desde las 6:00 a. m.">
+            </div>
+            <div class="mapa__controles" role="group" aria-label="Controles del mapa">
+              <button type="button" data-accion="mas" aria-label="Acercar">+</button>
+              <button type="button" data-accion="menos" aria-label="Alejar">−</button>
+              <button type="button" data-accion="todo" aria-label="Ver todo el mapa"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+              <button type="button" data-accion="completa" aria-label="Pantalla completa"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8V3h5M21 8V3h-5M3 16v5h5M21 16v5h-5M9 9h6v6H9z"/></svg></button>
+            </div>
+            <p class="mapa__aviso" id="mapa-aviso" aria-live="polite"></p>
+            <p class="mapa__ayuda">Pellizque o toque dos veces para acercar. Arrastre para moverse.</p>
+          </div>
         </figure>
       </div>
     </section>
@@ -228,7 +238,7 @@
           <div class="docs__filtros">
             <label class="buscador">
               <span class="sr">Buscar documentos</span>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
               <input type="search" id="doc-buscar" placeholder="Buscar por nombre o año" autocomplete="off">
             </label>
             <div class="chips" id="doc-categorias" role="group" aria-label="Filtrar por categoría"></div>
@@ -253,7 +263,7 @@
           </div>
           <aside class="noticias__fb" id="facebook" aria-labelledby="t-facebook" hidden>
             <div class="fb__cabeza">
-              <span class="fb__logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1Z"/></svg></span>
+              <span class="fb__logo"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1Z"/></svg></span>
               <div><h3 id="t-facebook">En Facebook</h3><small>Publicaciones recientes</small></div>
               <a class="fb__seguir" id="fb-seguir" href="#" target="_blank" rel="noopener">Seguir</a>
             </div>
@@ -319,7 +329,7 @@
             <a class="canal" id="canal-tel" href="#"><small>Línea de atención</small><b id="txt-tel"></b></a>
             <a class="canal" id="canal-correo" href="#"><small>Correo PQRS</small><b id="txt-correo"></b></a>
             <div class="canal"><small>Horario de oficina</small><b id="txt-horario"></b></div>
-            <a class="canal canal--fb" id="canal-fb" href="#" target="_blank" rel="noopener" hidden><small>Síganos en Facebook</small><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1Z"/></svg>Triple A del Barrio Cartagena</b></a>
+            <a class="canal canal--fb" id="canal-fb" href="#" target="_blank" rel="noopener" hidden><small>Síganos en Facebook</small><b><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1Z"/></svg>Triple A del Barrio Cartagena</b></a>
           </div>
           <h3 class="faq__titulo">Preguntas frecuentes</h3>
           <div class="faq" id="faq"></div>
@@ -363,7 +373,7 @@
         <p id="pie-dir"></p>
         <p><a id="pie-tel" href="#"></a></p>
         <p><a id="pie-correo" href="#"></a></p>
-        <p><a class="pie__fb" id="pie-fb" href="#" target="_blank" rel="noopener" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1Z"/></svg>Facebook</a></p>
+        <p><a class="pie__fb" id="pie-fb" href="#" target="_blank" rel="noopener" hidden><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1Z"/></svg>Facebook</a></p>
       </div>
       <div>
         <h2>Entidades de control</h2>
@@ -390,12 +400,6 @@
     </button>
   </div>
 
-  <dialog class="visor" id="visor" aria-label="Mapa de rutas de recolección">
-    <form method="dialog"><button class="visor__cerrar" aria-label="Cerrar">×</button></form>
-    <img src="img/rutas-aseo.webp" alt="Mapa de rutas de recolección de aseo del Barrio Cartagenita, en tamaño grande." width="1672" height="941">
-    <p class="visor__ayuda">Deslice con el dedo para recorrer todo el mapa.</p>
-  </dialog>
-
   <dialog class="dialogo" id="dialogo" aria-labelledby="dialogo-titulo">
     <form method="dialog"><button class="dialogo__cerrar" aria-label="Cerrar">×</button></form>
     <p class="dialogo__fecha" id="dialogo-fecha"></p>
@@ -404,7 +408,15 @@
     <a class="boton boton--agua" id="dialogo-pdf" href="#" download hidden>Descargar PDF</a>
   </dialog>
 
-  <script src="js/datos.js"></script>
-  <script src="js/app.js"></script>
+  <script>
+    /* datos.js se renueva cada 10 minutos para que los cambios de avisos y noticias se vean pronto.
+       Si cambia app.js o estilos.css, suba también el número de versión (v=). */
+    (function () {
+      var t = Math.floor(Date.now() / 600000);
+      ["js/datos.js?t=" + t, "js/app.js?v=20261119"].forEach(function (src) {
+        var s = document.createElement("script"); s.src = src; s.async = false; document.body.appendChild(s);
+      });
+    })();
+  </script>
 </body>
 </html>

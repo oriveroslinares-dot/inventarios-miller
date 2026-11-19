@@ -64,3 +64,10 @@ Edite `js/datos.js`:
 
 - El dominio y el hosting deben estar renovados para que la página se vea en internet.
 - Cambie las contraseñas que se compartieron por correo y por chat.
+
+## Si cambia el diseño (estilos.css o app.js)
+
+En `index.html` los archivos llevan un número de versión, por ejemplo `estilos.css?v=20261119`.
+Si modifica `estilos.css` o `app.js`, cambie ese número (por ejemplo, por la fecha del día) para que los
+navegadores descarguen la versión nueva y no usen una copia vieja guardada.
+`datos.js` no lo necesita: se renueva solo cada 10 minutos.

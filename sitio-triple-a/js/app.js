@@ -239,12 +239,141 @@
     document.addEventListener("click", function (e) { if (!panel.hidden && !caja.contains(e.target)) abrir(false); });
   })();
 
-  /* ---------- Visor del mapa de rutas ---------- */
+  /* ---------- Mapa de rutas interactivo (zoom y desplazamiento) ---------- */
   (function () {
-    var visor = $("#visor"); if (!visor) return;
-    var abrirVisor = function () { if (visor.showModal) visor.showModal(); else visor.setAttribute("open", ""); };
-    ["#rutas-mapa", "#rutas-ampliar"].forEach(function (s) { var b = $(s); if (b) b.addEventListener("click", abrirVisor); });
-    visor.addEventListener("click", function (e) { if (e.target === visor) visor.close(); });
+    var mapa = $("#mapa"), lienzo = $("#mapa-lienzo"), aviso = $("#mapa-aviso");
+    if (!mapa || !lienzo) return;
+    var IW = 1672, IH = 941, AR = IW / IH, MAX = 4;
+    // Centro aproximado de cada ruta en la imagen original (píxeles)
+    var RUTAS = { "1": { x: 915, y: 420, s: 2.3 }, "2": { x: 610, y: 430, s: 2.1 } };
+    var W, H, lw, lh, ox, oy, s = 1, x = 0, y = 0;
+    function medir() {
+      W = mapa.clientWidth; H = mapa.clientHeight;
+      lw = Math.min(W, H * AR); lh = lw / AR; ox = (W - lw) / 2; oy = (H - lh) / 2;
+      lienzo.style.width = lw + "px"; lienzo.style.height = lh + "px";
+      lienzo.style.left = ox + "px"; lienzo.style.top = oy + "px";
+    }
+    function limitar() {
+      s = Math.min(MAX, Math.max(1, s));
+      var cw = lw * s, ch = lh * s;
+      x = cw >= W ? Math.min(-ox, Math.max(W - ox - cw, x)) : (W - cw) / 2 - ox;
+      y = ch >= H ? Math.min(-oy, Math.max(H - oy - ch, y)) : (H - ch) / 2 - oy;
+    }
+    function aplicar(animar) {
+      limitar();
+      lienzo.classList.toggle("animar", !!animar && !quieto);
+      lienzo.style.transform = "translate(" + x + "px," + y + "px) scale(" + s + ")";
+      mapa.classList.toggle("ampliado", s > 1.01);
+    }
+    function zoomEn(px, py, nuevo, animar) {
+      nuevo = Math.min(MAX, Math.max(1, nuevo));
+      x = px - ox - (px - ox - x) * (nuevo / s);
+      y = py - oy - (py - oy - y) * (nuevo / s);
+      s = nuevo; aplicar(animar);
+    }
+    function marcarRuta(r) { document.querySelectorAll(".ruta-btn[data-ruta]").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.ruta === r); }); }
+    function irA(r) {
+      var t = RUTAS[r]; if (!t) return;
+      s = t.s; x = W / 2 - ox - (t.x / IW) * lw * s; y = H / 2 - oy - (t.y / IH) * lh * s;
+      aplicar(true); marcarRuta(r); usado();
+    }
+    function verTodo() { s = 1; x = 0; y = 0; aplicar(true); marcarRuta(null); }
+    function usado() { mapa.classList.add("usado"); }
+    var tAviso;
+    function avisar(txt) { aviso.textContent = txt; aviso.classList.add("visible"); clearTimeout(tAviso); tAviso = setTimeout(function () { aviso.classList.remove("visible"); }, 1400); }
+    var punto = function (e) { var r = mapa.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+
+    medir(); aplicar(false);
+    window.addEventListener("resize", function () { var rs = s; medir(); s = rs; aplicar(false); });
+
+    // Botones
+    mapa.querySelector(".mapa__controles").addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return; usado();
+      var a = b.dataset.accion;
+      if (a === "mas") zoomEn(W / 2, H / 2, s * 1.5, true);
+      else if (a === "menos") zoomEn(W / 2, H / 2, s / 1.5, true);
+      else if (a === "todo") verTodo();
+      else if (a === "completa") pantallaCompleta();
+    });
+    document.querySelectorAll(".ruta-btn[data-ruta]").forEach(function (b) {
+      b.addEventListener("click", function () { if (b.getAttribute("aria-pressed") === "true") verTodo(); else irA(b.dataset.ruta); });
+    });
+
+    // Rueda: con Ctrl/⌘ acerca; sin Ctrl deja hacer scroll a la página
+    mapa.addEventListener("wheel", function (e) {
+      if (!(e.ctrlKey || e.metaKey) && !document.fullscreenElement && !mapa.classList.contains("pantalla")) {
+        if (s === 1) avisar("Use Ctrl + rueda del mouse para acercar"); return;
+      }
+      e.preventDefault(); usado(); var p = punto(e);
+      zoomEn(p.x, p.y, s * Math.exp(-e.deltaY * 0.0022), false);
+    }, { passive: false });
+
+    // Arrastrar y pellizcar (mouse y táctil)
+    var ptrs = new Map(), inicio = null;
+    mapa.addEventListener("pointerdown", function (e) {
+      if (e.target.closest(".mapa__controles")) return;
+      ptrs.set(e.pointerId, punto(e)); mapa.setPointerCapture(e.pointerId);
+      inicio = ptrs.size === 2 ? pellizcoInicio() : { px: punto(e).x, py: punto(e).y, x: x, y: y };
+      if (s > 1) mapa.classList.add("arrastrando");
+    });
+    function pellizcoInicio() {
+      var p = Array.from(ptrs.values());
+      return { d: Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y), cx: (p[0].x + p[1].x) / 2, cy: (p[0].y + p[1].y) / 2, s: s, x: x, y: y };
+    }
+    mapa.addEventListener("pointermove", function (e) {
+      if (!ptrs.has(e.pointerId)) return;
+      ptrs.set(e.pointerId, punto(e));
+      if (ptrs.size === 2 && inicio && inicio.d) {
+        var p = Array.from(ptrs.values()), d = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y);
+        var cx = (p[0].x + p[1].x) / 2, cy = (p[0].y + p[1].y) / 2;
+        s = inicio.s; x = inicio.x + (cx - inicio.cx); y = inicio.y + (cy - inicio.cy);
+        zoomEn(cx, cy, inicio.s * d / inicio.d, false); usado();
+      } else if (ptrs.size === 1 && inicio && s > 1) {
+        var q = punto(e); x = inicio.x + (q.x - inicio.px); y = inicio.y + (q.y - inicio.py); aplicar(false); usado();
+      }
+    });
+    function soltar(e) {
+      ptrs.delete(e.pointerId); mapa.classList.remove("arrastrando");
+      if (ptrs.size === 1) { var q = Array.from(ptrs.values())[0]; inicio = { px: q.x, py: q.y, x: x, y: y }; } else if (!ptrs.size) inicio = null;
+    }
+    mapa.addEventListener("pointerup", soltar); mapa.addEventListener("pointercancel", soltar);
+
+    // Doble clic o doble toque: acercar (o volver si ya está muy cerca)
+    var ultimoToque = 0;
+    function dobleToque(p) { usado(); if (s >= MAX - 0.1) verTodo(); else zoomEn(p.x, p.y, s * 2, true); }
+    mapa.addEventListener("dblclick", function (e) { if (!e.target.closest(".mapa__controles")) dobleToque(punto(e)); });
+    mapa.addEventListener("pointerup", function (e) {
+      if (e.pointerType !== "touch") return;
+      var t = Date.now(); if (t - ultimoToque < 300) { dobleToque(punto(e)); ultimoToque = 0; } else ultimoToque = t;
+    });
+
+    // Teclado
+    mapa.addEventListener("keydown", function (e) {
+      var paso = 60, k = e.key;
+      if (k === "+" || k === "=") zoomEn(W / 2, H / 2, s * 1.4, true);
+      else if (k === "-" || k === "_") zoomEn(W / 2, H / 2, s / 1.4, true);
+      else if (k === "0") verTodo();
+      else if (k === "ArrowLeft") { x += paso; aplicar(true); }
+      else if (k === "ArrowRight") { x -= paso; aplicar(true); }
+      else if (k === "ArrowUp") { y += paso; aplicar(true); }
+      else if (k === "ArrowDown") { y -= paso; aplicar(true); }
+      else if (k === "Escape" && mapa.classList.contains("pantalla")) { salirPantalla(); }
+      else return;
+      e.preventDefault(); usado();
+    });
+
+    // Pantalla completa (con respaldo para iPhone)
+    function pantallaCompleta() {
+      if (document.fullscreenElement || mapa.classList.contains("pantalla")) { salirPantalla(); return; }
+      if (mapa.requestFullscreen) mapa.requestFullscreen().catch(function () { mapa.classList.add("pantalla"); recalcular(); });
+      else { mapa.classList.add("pantalla"); recalcular(); }
+    }
+    function salirPantalla() {
+      if (document.fullscreenElement) document.exitFullscreen();
+      mapa.classList.remove("pantalla"); recalcular();
+    }
+    function recalcular() { requestAnimationFrame(function () { var rs = s; medir(); s = rs; aplicar(false); }); }
+    document.addEventListener("fullscreenchange", recalcular);
   })();
 
   /* ---------- Recolección ---------- */
