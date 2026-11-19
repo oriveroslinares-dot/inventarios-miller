@@ -49,7 +49,9 @@ window.TRIPLE_A = {
   mensajeEstado: "Acueducto, alcantarillado y aseo funcionan con normalidad.",
 
   // ---------- RECORRIDO DEL AGUA ----------
-  fuente: "Río Botello",           // POR CONFIRMAR
+  proveedorAgua: "Empresa de Aguas de Facatativá S.A.S. E.S.P.",  // compramos el agua en bloque
+  macromedidores: 4,
+  aseoInicio: "2009-03-10",        // inicio del servicio de aseo según el RUPS
 
   // ---------- CORTES Y AVISOS (fechas AAAA-MM-DD) ----------
   avisos: [
@@ -156,6 +158,8 @@ window.TRIPLE_A = {
 
   // ---------- PREGUNTAS FRECUENTES ----------
   preguntas: [
+    { p: "¿Puedo tener el servicio de aseo si no vivo en el Barrio Cartagena?", r: "Sí. Prestamos el servicio de aseo en todo Facatativá y es de libre competencia: usted elige su prestador. Escríbanos por WhatsApp o acérquese a la oficina con su factura de servicios y le explicamos cómo hacer el cambio." },
+    { p: "¿De dónde viene el agua que llega a mi casa?", r: "Compramos agua potable en bloque a la Empresa de Aguas de Facatativá y la distribuimos por nuestras redes propias, controladas con cuatro macromedidores, hasta el medidor de cada predio." },
     { p: "¿Cuánto tiempo tienen para responder mi PQR?", r: "Máximo 15 días hábiles desde que la recibimos, según la Ley 142 de 1994. Si no respondemos a tiempo, se entiende resuelta a su favor (silencio administrativo positivo)." },
     { p: "¿Qué hago si mi factura llega muy alta?", r: "Revise su medidor con todas las llaves cerradas: si gira, hay una fuga interna. Si no encuentra la causa, presente un reclamo con su código de suscriptor y lo revisamos." },
     { p: "¿Qué pasa si no pago a tiempo?", r: "Después de la fecha límite se generan intereses de mora y, si se acumulan facturas sin pagar, el servicio puede ser suspendido. Si tiene dificultades, acérquese a la oficina para acordar un pago." },

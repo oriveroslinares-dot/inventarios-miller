@@ -168,6 +168,20 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .recoleccion li { background: #fff; border-radius: 999px; padding: .35rem .8rem; font-size: .92rem; color: var(--gris); }
 .recoleccion b { color: var(--tinta); margin-right: .3rem; }
 
+/* ---------- Banda: aseo para todo Facatativá ---------- */
+.aseo-banda { margin-top: 1.25rem; display: grid; grid-template-columns: auto 1fr auto; gap: 1.5rem 2rem; align-items: center; padding: clamp(1.4rem, 3vw, 2rem) clamp(1.4rem, 3vw, 2.4rem); border-radius: 20px; color: #fff; background: radial-gradient(90% 140% at 100% 0%, #3A9B25 0%, transparent 60%), #1F6B14; position: relative; overflow: hidden; }
+.aseo-banda__ilus { width: 84px; height: 84px; flex: none; }
+.aseo-banda__ilus circle:first-child { fill: rgb(255 255 255 / .14); }
+.aseo-banda__ilus path { fill: #fff; }
+.aseo-banda__ilus circle:last-child { fill: #1F6B14; }
+.aseo-banda h3 { font-size: clamp(1.5rem, 2.8vw, 2rem); font-variation-settings: "wdth" 108; }
+.aseo-banda p { margin-top: .4rem; color: #DDF3D6; max-width: 62ch; }
+.aseo-banda b { color: #fff; }
+.aseo-banda .boton--agua { background: #fff; color: #1F6B14; white-space: nowrap; }
+.aseo-banda .boton--agua:hover { background: #E7F6E2; }
+@media (max-width: 1000px) { .aseo-banda { grid-template-columns: auto 1fr; } .aseo-banda .boton { grid-column: 1 / -1; justify-self: start; } }
+@media (max-width: 720px) { .aseo-banda { grid-template-columns: 1fr; } .aseo-banda__ilus { width: 64px; height: 64px; } .aseo-banda .boton { width: 100%; } }
+
 /* ---------- Olas entre secciones ---------- */
 .con-ola { position: relative; --ola-color: var(--noche); }
 .con-ola::before { content: ""; position: absolute; left: 0; right: 0; top: -27px; height: 28px; pointer-events: none; background: var(--ola-color);

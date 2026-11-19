@@ -95,7 +95,14 @@
 
   /* ---------- Recorrido del agua: avanza con el scroll ---------- */
   var rec = $("#recorrido"), pasos = Array.prototype.slice.call(document.querySelectorAll(".paso")), tubo = $("#tubo-agua");
-  document.querySelectorAll("[data-fuente]").forEach(function (el) { el.textContent = D.fuente || "de abastecimiento"; });
+  document.querySelectorAll("[data-proveedor]").forEach(function (el) { el.textContent = D.proveedorAgua || "nuestro proveedor"; });
+  var NUMS = ["Cero", "Un", "Dos", "Tres", "Cuatro", "Cinco", "Seis", "Siete", "Ocho", "Nueve", "Diez"];
+  document.querySelectorAll("[data-macros]").forEach(function (el) { var n = +D.macromedidores || 0; el.textContent = NUMS[n] || String(n); });
+  // Banda de aseo para todo Facatativá
+  var aseoN = (D.suscriptores || {}).aseo;
+  document.querySelectorAll("[data-suscriptores-aseo]").forEach(function (el) { if (aseoN) el.textContent = (Math.floor(aseoN / 100) * 100).toLocaleString("es-CO"); });
+  var aseoBtn = $("#aseo-solicitar");
+  if (aseoBtn) aseoBtn.href = wa("Hola, Triple A. Quiero el servicio de aseo. Mi dirección en Facatativá es: ");
   function avanzar() {
     var r = rec.getBoundingClientRect();
     var total = rec.offsetHeight - window.innerHeight;
@@ -327,7 +334,9 @@
     if (su.alcantarillado) cifras.push(["Suscriptores de alcantarillado", miles(su.alcantarillado)]);
     if (su.aseo) cifras.push(["Suscriptores de aseo", miles(su.aseo)]);
     $("#cifras").innerHTML = cifras.map(function (c) { return "<div><dt>" + esc(c[0]) + "</dt><dd>" + esc(c[1]) + "</dd></div>"; }).join("");
-    if (D.fundacion) $("#nosotros-intro").textContent = "Somos una asociación de usuarios que presta acueducto, alcantarillado y aseo en el Barrio Cartagena desde " + fechaLarga(D.fundacion) + ". Los mismos suscriptores, reunidos en asamblea, eligen a la junta directiva que administra la empresa.";
+    if (D.fundacion) $("#nosotros-intro").textContent = "Somos una asociación de usuarios que presta acueducto y alcantarillado en el Barrio Cartagena desde el " + fechaLarga(D.fundacion) +
+      (D.aseoInicio ? ", y desde " + fecha(D.aseoInicio).getFullYear() + " el servicio de aseo en todo Facatativá" : "") +
+      ". Compramos el agua en bloque, la distribuimos por redes propias y tratamos las aguas residuales en nuestra PTAR. Los mismos suscriptores, reunidos en asamblea, eligen a la junta directiva.";
     var r = D.representanteLegal, s = D.suplente;
     if (r) {
       $("#representante").innerHTML = '<span class="representante__rotulo">' + esc(r.cargo || "Representante legal") + "</span>" + avatar(r) +

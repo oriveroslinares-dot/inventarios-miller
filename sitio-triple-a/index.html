@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Triple A del Barrio Cartagena | Servicios públicos en Facatativá</title>
-  <meta name="description" content="Acueducto, alcantarillado y aseo del Barrio Cartagena, Facatativá. Estados financieros, comunicados, tarifas, cortes programados y atención de PQRS.">
+  <meta name="description" content="Acueducto y alcantarillado del Barrio Cartagena y servicio de aseo en todo Facatativá. Estados financieros, noticias, tarifas, cortes programados y atención de PQRS.">
   <meta name="theme-color" content="#06214A">
   <meta property="og:title" content="Triple A del Barrio Cartagena">
   <meta property="og:description" content="Construimos servicio, construimos comunidad.">
@@ -49,7 +49,7 @@
           <span class="linea linea--clara" data-entra><span>comunidad.</span></span>
         </h1>
         <div class="portada__pie" data-entra>
-          <p class="portada__bajada">Acueducto, alcantarillado y aseo para los hogares del Barrio Cartagena.</p>
+          <p class="portada__bajada">Acueducto y alcantarillado para el Barrio Cartagena. Servicio de aseo para todo Facatativá.</p>
           <div class="portada__botones">
             <a class="boton boton--agua" href="#pagar" data-pagos hidden>Pagar mi factura</a>
             <a class="boton boton--borde" href="#documentos" data-pagos hidden>Ver documentos</a>
@@ -107,20 +107,20 @@
       <div class="recorrido__fijo">
         <div class="contenedor recorrido__grilla">
           <div class="recorrido__cabeza">
-            <h2 id="t-recorrido" class="titulo">Del río a su llave</h2>
-            <p class="intro">Así llega el agua a su casa y así la devolvemos al ambiente. Baje para seguir el recorrido.</p>
+            <h2 id="t-recorrido" class="titulo">Así llega el agua a su casa</h2>
+            <p class="intro">Desde el punto de entrega hasta su llave, y de vuelta al ambiente ya tratada. Baje para seguir el recorrido.</p>
           </div>
           <svg class="tubo" viewBox="0 0 60 600" preserveAspectRatio="none" aria-hidden="true">
             <path class="tubo__fondo" d="M30 0 V600"/>
             <path class="tubo__agua" id="tubo-agua" d="M30 0 V600" pathLength="1"/>
           </svg>
           <ol class="pasos" id="pasos">
-            <li class="paso"><h3>Captación</h3><p>Tomamos el agua de la fuente <span data-fuente></span> y la conducimos a la planta.</p></li>
-            <li class="paso"><h3>Tratamiento</h3><p>Filtramos y desinfectamos el agua para que sea apta para el consumo humano.</p></li>
-            <li class="paso"><h3>Almacenamiento</h3><p>La guardamos en tanques que mantienen la presión y el suministro constante.</p></li>
-            <li class="paso"><h3>Distribución</h3><p>Recorre la red de tuberías del barrio hasta el medidor de cada predio.</p></li>
+            <li class="paso"><h3>Compra en bloque</h3><p>Recibimos agua potable de la <span data-proveedor></span>, registrada en el medidor del punto de entrega.</p></li>
+            <li class="paso"><h3>Macromedición</h3><p><span data-macros></span> macromedidores controlan cuánta agua entra a nuestra red, para detectar fugas y pérdidas a tiempo.</p></li>
+            <li class="paso"><h3>Redes propias</h3><p>Nuestra propia red de tuberías lleva el agua por el barrio hasta el medidor de cada predio.</p></li>
             <li class="paso"><h3>Su hogar</h3><p>Llega a su llave. Usted la usa, nosotros medimos y facturamos solo lo que consume.</p></li>
-            <li class="paso"><h3>Alcantarillado</h3><p>Las aguas usadas salen por la red de alcantarillado para su disposición adecuada.</p></li>
+            <li class="paso"><h3>Alcantarillado</h3><p>Las aguas usadas salen de su casa por nuestra red de alcantarillado.</p></li>
+            <li class="paso"><h3>Tratamiento (PTAR)</h3><p>Nuestra planta de tratamiento de aguas residuales las limpia antes de devolverlas al ambiente.</p></li>
           </ol>
         </div>
       </div>
@@ -139,7 +139,7 @@
               <path class="s-ola" d="M20 104c10-6 20-6 30 0s20 6 30 0 20-6 30 0 20 6 30 0"/>
             </svg>
             <h3>Acueducto</h3>
-            <p>Agua potable en cada predio, con controles de calidad y medición individual.</p>
+            <p>Compramos agua potable en bloque a Aguas de Facatativá y la llevamos a cada hogar por nuestras redes propias, controladas con cuatro macromedidores.</p>
             <a class="servicio__link" href="#avisos">Ver calidad del agua</a>
           </article>
           <article class="servicio servicio--red">
@@ -152,7 +152,7 @@
               <circle cx="128" cy="40" r="5" class="s-burbuja"/><circle cx="116" cy="26" r="3.5" class="s-burbuja"/>
             </svg>
             <h3>Alcantarillado</h3>
-            <p>Redes que recogen las aguas residuales y lluvias. No arroje aceite ni basura a los sifones.</p>
+            <p>Recogemos las aguas residuales por nuestra red y las tratamos en nuestra propia PTAR. No arroje aceite ni basura a los sifones.</p>
             <a class="servicio__link" href="#recorrido">Ver el recorrido del agua</a>
           </article>
           <article class="servicio servicio--aseo">
@@ -163,10 +163,19 @@
               <path class="s-reciclar" d="M72 66l8-12 8 12M88 66l-4 10h-10M74 82l-6-8"/>
             </svg>
             <h3>Aseo</h3>
-            <p>Recolección de residuos y material aprovechable. Saque la bolsa solo el día que corresponde.</p>
+            <p>Recolección de residuos, barrido de vías y limpieza de áreas públicas. Prestamos este servicio en todo Facatativá.</p>
             <ul class="recoleccion" id="recoleccion"></ul>
           </article>
         </div>
+
+        <aside class="aseo-banda" aria-labelledby="t-aseo-banda">
+          <svg class="aseo-banda__ilus" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="56"/><path d="M60 22c-13 0-24 11-24 24 0 18 24 46 24 46s24-28 24-46c0-13-11-24-24-24Z"/><circle cx="60" cy="46" r="9"/></svg>
+          <div>
+            <h3 id="t-aseo-banda">Aseo para todo Facatativá</h3>
+            <p>No importa en qué barrio viva: el servicio de aseo es de libre competencia y usted puede elegir quién se lo presta. Pásese a Triple A y únase a los más de <b data-suscriptores-aseo>2.800</b> suscriptores que ya confían en nosotros.</p>
+          </div>
+          <a class="boton boton--agua" id="aseo-solicitar" href="#" target="_blank" rel="noopener">Quiero el servicio de aseo</a>
+        </aside>
       </div>
     </section>
 
