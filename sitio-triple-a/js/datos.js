@@ -9,7 +9,8 @@ window.TRIPLE_A = {
   razonSocial: "Asociación de Socios Suscriptores del Servicio de Acueducto, Alcantarillado y Aseo del Barrio Cartagena Facatativá",
   sigla: "Triple A del Barrio Cartagena Facatativá E.S.P.",
   nit: "832.001.989-1",
-  fundacion: "1997-03-09",
+  asociacionDesde: 1977,           // año en que nació la asociación (dato de la empresa)
+  fundacion: "1997-03-09",         // constitución formal como prestador, según el RUPS
   inicioOperaciones: "1997-08-15",
   rupsFecha: "2026-10-27",
   suscriptores: { acueducto: 1438, alcantarillado: 1420, aseo: 2882 },

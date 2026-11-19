@@ -466,14 +466,16 @@
     var avatar = function (per) { return '<span class="persona__avatar">' + (per.foto ? '<img src="' + esc(per.foto) + '" alt="">' : esc(iniciales(per.nombre))) + "</span>"; };
     var miles = function (n) { return Number(n).toLocaleString("es-CO"); };
     var su = D.suscriptores || {}, cifras = [];
-    if (D.fundacion) cifras.push(["Al servicio del barrio desde", fecha(D.fundacion).getFullYear()]);
+    if (D.asociacionDesde || D.fundacion) cifras.push(["Asociación al servicio del barrio desde", D.asociacionDesde || fecha(D.fundacion).getFullYear()]);
     if (su.acueducto) cifras.push(["Suscriptores de acueducto", miles(su.acueducto)]);
     if (su.alcantarillado) cifras.push(["Suscriptores de alcantarillado", miles(su.alcantarillado)]);
     if (su.aseo) cifras.push(["Suscriptores de aseo", miles(su.aseo)]);
     $("#cifras").innerHTML = cifras.map(function (c) { return "<div><dt>" + esc(c[0]) + "</dt><dd>" + esc(c[1]) + "</dd></div>"; }).join("");
-    if (D.fundacion) $("#nosotros-intro").textContent = "Somos una asociación de usuarios que presta acueducto y alcantarillado en el Barrio Cartagena desde el " + fechaLarga(D.fundacion) +
-      (D.aseoInicio ? ", y desde " + fecha(D.aseoInicio).getFullYear() + " el servicio de aseo en todo Facatativá" : "") +
-      ". Compramos el agua en bloque, la distribuimos por redes propias y tratamos las aguas residuales en nuestra PTAR. Los mismos suscriptores, reunidos en asamblea, eligen a la junta directiva.";
+    var intro = "Somos una asociación de usuarios que trabaja por los servicios públicos del Barrio Cartagena" + (D.asociacionDesde ? " desde " + D.asociacionDesde : "") + ".";
+    if (D.fundacion) intro += " El " + fechaLarga(D.fundacion) + " nos constituimos formalmente como prestador de acueducto y alcantarillado";
+    if (D.aseoInicio) intro += (D.fundacion ? ", y desde " : " Desde ") + fecha(D.aseoInicio).getFullYear() + " prestamos el servicio de aseo en todo Facatativá";
+    intro += ". Compramos el agua en bloque, la distribuimos por redes propias y tratamos las aguas residuales en nuestra PTAR. Los mismos suscriptores, reunidos en asamblea, eligen a la junta directiva.";
+    $("#nosotros-intro").textContent = intro;
     var r = D.representanteLegal, s = D.suplente;
     if (r) {
       $("#representante").innerHTML = '<span class="representante__rotulo">' + esc(r.cargo || "Representante legal") + "</span>" + avatar(r) +
