@@ -32,6 +32,9 @@ window.TRIPLE_A = {
   // Complete los números reales. Si un medio no aplica, bórrelo de la lista.
   // Si "numero" queda vacío, la página le indica al usuario que lo pida en la oficina.
   pagos: {
+    // mostrar: false oculta la sección "Pague su factura aquí" y sus botones en toda la página.
+    // Cámbielo a true cuando tengan Wompi, PSE o cuentas para recibir pagos.
+    mostrar: false,
     enlacePSE: "",                 // POR CONFIRMAR: enlace del botón PSE de su banco (déjelo vacío si no tiene)
     medios: [
       { id: "nequi", nombre: "Nequi", detalle: "Número celular", numero: "", titular: "" },          // POR CONFIRMAR
@@ -62,7 +65,7 @@ window.TRIPLE_A = {
     { nombre: "María Elvira Maldonado Martínez", cargo: "Presidente", foto: "" },
     { nombre: "Alba Rocío García Gómez", cargo: "Vicepresidente", foto: "" },
     { nombre: "Olga Lucía Chavarro Santana", cargo: "Secretario", foto: "" },
-    { nombre: "Nubia Cristina Cruz Forero", cargo: "Miembro de junta", foto: "" },   // POR CONFIRMAR: en el RUPS figura como "Otro" (¿tesorería, fiscal?)
+    { nombre: "Nubia Cristina Cruz Forero", cargo: "Tesorera", foto: "" },
     { nombre: "Daniel Duarte Duarte", cargo: "Vocal", foto: "" },
     { nombre: "José Enrique Caicedo Castañeda", cargo: "Vocal", foto: "" },
     { nombre: "Luz Stella Carrasco Alarcón", cargo: "Vocal", foto: "" }

@@ -48,7 +48,8 @@ Abra `js/datos.js` y revise todo lo marcado **POR CONFIRMAR**:
 
 ## 4. Datos de pago (sección "Pague su factura aquí")
 
-En `js/datos.js`, bloque `pagos`:
+En `js/datos.js`, bloque `pagos`. **Hoy está apagada** (`mostrar: false`): no se ve la sección ni los botones de pago.
+Para activarla cuando tengan Wompi, PSE o cuentas, cambie `mostrar: false` por `mostrar: true` y complete:
 - `enlacePSE`: pegue el enlace del botón PSE que le da su banco. Si lo deja vacío, la opción PSE no aparece.
 - `medios`: escriba el número de Nequi y la cuenta de Bancolombia, con el titular. Si un medio no aplica, borre esa línea.
   Si deja un número vacío, la página le pide al usuario que lo solicite en la línea de atención.

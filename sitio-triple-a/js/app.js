@@ -108,6 +108,11 @@
   window.addEventListener("scroll", avanzar, { passive: true });
   window.addEventListener("resize", avanzar);
 
+  /* ---------- Interruptor de pagos (datos.js > pagos.mostrar) ---------- */
+  var conPagos = !!(D.pagos && D.pagos.mostrar);
+  document.querySelectorAll("[data-pagos]").forEach(function (el) { el.hidden = !conPagos; });
+  document.querySelectorAll("[data-sin-pagos]").forEach(function (el) { el.hidden = conPagos; });
+
   /* ---------- Pague su factura ---------- */
   (function () {
     var P = D.pagos || {}, form = $("#pago"), cont = $("#medios"), det = $("#medio-detalle"), errP = $("#pago-error");
