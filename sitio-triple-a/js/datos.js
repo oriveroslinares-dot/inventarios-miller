@@ -162,7 +162,7 @@ window.TRIPLE_A = {
   // ---------- TARIFAS VIGENTES 2026 ----------
   // Fuente: "Tarifas vigentes 2026" (documentos/tarifas-vigentes-2026.pdf), publicado en noviembre de 2026.
   // En las filas, use null en "básico" cuando la categoría paga tarifa única por m³ (sin tramos).
-  tarifas: {
+  tarifasVigentes: {
     vigencia: "A partir del período de facturación julio–agosto de 2026",
     ajuste: "Incremento del 4,77 %, igual a la variación del IPC de enero a junio de 2026 certificada por el DANE (Ley 142 de 1994, art. 125). Los porcentajes de subsidio y contribución del Acuerdo Municipal de Facatativá 2022-2026 no cambian.",
     pdf: "documentos/tarifas-vigentes-2026.pdf",
@@ -216,6 +216,27 @@ window.TRIPLE_A = {
       "Las tarifas solo se vuelven a ajustar cuando el IPC acumule una variación de por lo menos el 3 % (Ley 142 de 1994, art. 125). Cualquier nuevo ajuste se publicará antes de aplicarse.",
       "Los usuarios industriales aforados (facturados por tonelada) reciben su liquidación por separado.",
       "Los valores están en pesos colombianos. No incluyen otros cobros como reconexión, intereses de mora o cuotas de financiación."
+    ]
+  },
+
+  // ---------- COPIA DE COMPATIBILIDAD (no la borre) ----------
+  // Algunos navegadores guardan una versión vieja de la página. Esa versión lee las tarifas en este formato.
+  // Si cambian las tarifas, actualice también estos valores (complementario y suntuario = valor desde 22 m³).
+  periodoTarifas: "Vigentes desde el período julio–agosto de 2026",
+  tarifas: {
+    "Acueducto": [
+      { uso: "Residencial", fijo: 12292.52, basico: 1423.29, complementario: 2587.80, suntuario: 2587.80 },
+      { uso: "Comercial (tarifa única)", fijo: 34419.06, basico: 3881.70, complementario: 3881.70, suntuario: 3881.70 },
+      { uso: "Oficial (tarifa única)", fijo: 16390.03, basico: 2587.80, complementario: 2587.80, suntuario: 2587.80 },
+      { uso: "Industrial (tarifa única)", fijo: 63522.05, basico: 4406.84, complementario: 4406.84, suntuario: 4406.84 },
+      { uso: "Especial (tarifa única)", fijo: 16390.03, basico: 2587.80, complementario: 2587.80, suntuario: 2587.80 }
+    ],
+    "Alcantarillado": [
+      { uso: "Residencial", fijo: 4891.50, basico: 748.77, complementario: 1497.54, suntuario: 1497.54 },
+      { uso: "Comercial (tarifa única)", fijo: 16305.01, basico: 2246.31, complementario: 2246.31, suntuario: 2246.31 },
+      { uso: "Oficial (tarifa única)", fijo: 6522.01, basico: 1497.54, complementario: 1497.54, suntuario: 1497.54 },
+      { uso: "Industrial (tarifa única)", fijo: 20218.22, basico: 1946.80, complementario: 1946.80, suntuario: 1946.80 },
+      { uso: "Especial (tarifa única)", fijo: 6522.01, basico: 1497.54, complementario: 1497.54, suntuario: 1497.54 }
     ]
   },
 

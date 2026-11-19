@@ -538,7 +538,7 @@
 
   /* ---------- Tarifas vigentes ---------- */
   (function () {
-    var T = D.tarifas || {};
+    var T = D.tarifasVigentes || {};
     var SERV = [["acueducto", "Acueducto"], ["alcantarillado", "Alcantarillado"], ["aseo", "Aseo"]].filter(function (x) { return T[x[0]]; });
     if (!SERV.length) return;
     $("#tarifa-vigencia").textContent = T.vigencia || "";
