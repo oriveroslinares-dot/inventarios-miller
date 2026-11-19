@@ -71,3 +71,11 @@ En `index.html` los archivos llevan un número de versión, por ejemplo `estilos
 Si modifica `estilos.css` o `app.js`, cambie ese número (por ejemplo, por la fecha del día) para que los
 navegadores descarguen la versión nueva y no usen una copia vieja guardada.
 `datos.js` no lo necesita: se renueva solo cada 10 minutos.
+
+## Alertas del servicio (alerta naranja, cortes)
+
+En `js/datos.js`:
+- `estado: "alerta"` muestra el punto naranja en la portada y la cinta naranja con `mensajeEstado`.
+- `tituloEstado` es el texto corto de la etiqueta (por ejemplo, "Alerta naranja").
+- En `avisos`, `vigente: true` mantiene el aviso destacado en naranja aunque pase su fecha.
+- Cuando termine la alerta: cambie `estado` a `"normal"`, ponga el mensaje "Acueducto, alcantarillado y aseo funcionan con normalidad." y borre el aviso.

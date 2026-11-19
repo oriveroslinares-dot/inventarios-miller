@@ -94,6 +94,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .estado { position: absolute; right: max(1.25rem, (100% - var(--ancho)) / 2); top: 6rem; display: flex; align-items: center; gap: .75rem; max-width: 22rem; padding: .8rem 1rem; border: 1px solid rgb(255 255 255 / .2); border-radius: 8px; background: rgb(6 33 74 / .55); backdrop-filter: blur(8px); text-decoration: none; font-size: .95rem; line-height: 1.35; color: #d6e9fb; }
 .estado b { display: block; color: #fff; }
 .estado__punto { flex: none; width: 12px; height: 12px; border-radius: 50%; background: var(--hoja); box-shadow: 0 0 0 0 rgb(70 176 46 / .6); animation: pulso 2.4s infinite; }
+.estado__punto[data-estado="alerta"] { background: #F47B20; box-shadow: 0 0 0 0 rgb(244 123 32 / .7); }
 .estado__punto[data-estado="programado"] { background: var(--alerta); }
 .estado__punto[data-estado="interrumpido"] { background: var(--peligro); }
 @keyframes pulso { 70% { box-shadow: 0 0 0 10px transparent; } }
@@ -229,6 +230,16 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 28' preserveAspectRatio='none'%3E%3Cpath d='M0 28V14C150 -4 300 -4 450 12S750 30 900 14 1100 0 1200 10V28Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
           mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 28' preserveAspectRatio='none'%3E%3Cpath d='M0 28V14C150 -4 300 -4 450 12S750 30 900 14 1100 0 1200 10V28Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat; }
 .cinta.con-ola { --ola-color: var(--agua); }
+.cinta--alerta { background: #F47B20; color: #2B1300; }
+.cinta--alerta.con-ola { --ola-color: #F47B20; }
+.cinta--alerta .cinta__rotulo { background: #2B1300; color: #FFD9B8; border-color: #2B1300; animation: titilar 2s ease-in-out infinite; }
+.cinta--alerta .cinta__texto { white-space: normal; }
+.cinta--alerta .cinta__fecha { font-weight: 700; text-decoration: underline; }
+.cinta--alerta[data-estado="interrumpido"] { background: var(--peligro); color: #fff; }
+.cinta--alerta[data-estado="interrumpido"].con-ola { --ola-color: var(--peligro); }
+@keyframes titilar { 50% { opacity: .65; } }
+.aviso.aviso--vigente { margin: 0; padding: 1.3rem 1.3rem 1.3rem 1.1rem; border-top: 0; border-radius: 14px; background: #FFF1E5; border-left: 5px solid #F47B20; }
+.aviso.aviso--vigente .aviso__fecha { color: #B4520B; }
 
 /* ---------- Asistente flotante (mascota) ---------- */
 .ayuda { position: fixed; right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 45; display: grid; justify-items: end; gap: .8rem; transform: translateY(140%); transition: transform .5s var(--facil); }

@@ -45,9 +45,12 @@ window.TRIPLE_A = {
   },
 
   // ---------- ESTADO DEL SERVICIO ----------
-  // estado: "normal" | "programado" | "interrumpido"
-  estado: "normal",
-  mensajeEstado: "Acueducto, alcantarillado y aseo funcionan con normalidad.",
+  // estado: "normal" | "alerta" | "programado" | "interrumpido"
+  //   "alerta" muestra la cinta naranja bajo la portada. Cuando pase la alerta, vuelva a "normal" y
+  //   cambie el mensaje por: "Acueducto, alcantarillado y aseo funcionan con normalidad."
+  estado: "alerta",
+  tituloEstado: "Alerta naranja",
+  mensajeEstado: "El servicio de acueducto puede presentar intermitencia. Almacene agua y úsela con moderación.",
 
   // ---------- RECORRIDO DEL AGUA ----------
   proveedorAgua: "Empresa de Aguas de Facatativá S.A.S. E.S.P.",  // compramos el agua en bloque
@@ -55,7 +58,15 @@ window.TRIPLE_A = {
   aseoInicio: "2009-03-10",        // inicio del servicio de aseo según el RUPS
 
   // ---------- CORTES Y AVISOS (fechas AAAA-MM-DD) ----------
+  // vigente: true mantiene el aviso destacado aunque su fecha ya haya pasado (bórrelo al terminar la alerta).
   avisos: [
+    {
+      fecha: "2026-11-19",
+      vigente: true,
+      titulo: "Alerta naranja: posible intermitencia en el acueducto",
+      detalle: "Mientras dure la alerta, el suministro de agua puede interrumpirse por momentos. Almacene agua en recipientes limpios y tapados, úsela con moderación, cierre bien las llaves y repórtenos cualquier fuga.",
+      sectores: "Todo el barrio"
+    },
     // { fecha: "2026-12-02", titulo: "Lavado de tanque", detalle: "Suspensión de 8:00 a. m. a 2:00 p. m.", sectores: "Todo el barrio" }
   ],
 

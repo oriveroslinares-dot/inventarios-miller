@@ -79,15 +79,23 @@
   setTimeout(arrancar, 1500);
 
   /* ---------- Estado del servicio ---------- */
-  var titulos = { normal: "Servicio normal", programado: "Corte programado", interrumpido: "Servicio interrumpido" };
+  var titulos = { normal: "Servicio normal", alerta: "Alerta", programado: "Corte programado", interrumpido: "Servicio interrumpido" };
   var est = titulos[D.estado] ? D.estado : "normal";
+  var tituloEst = D.tituloEstado && est !== "normal" ? D.tituloEstado : titulos[est];
   $("#estado-punto").dataset.estado = est;
-  $("#estado-titulo").textContent = titulos[est];
+  $("#estado-titulo").textContent = tituloEst;
   $("#estado-mensaje").textContent = D.mensajeEstado || "";
 
   /* ---------- Cinta del último comunicado ---------- */
   var comunicados = (D.noticias || D.comunicados || []).slice().sort(function (a, b) { return a.fecha < b.fecha ? 1 : -1; });
-  if (comunicados.length) {
+  if (est !== "normal") {
+    // Mientras haya alerta o corte, la cinta muestra el estado del servicio en lugar de la última noticia
+    var cinta = $("#cinta");
+    cinta.hidden = false; cinta.href = "#avisos"; cinta.classList.add("cinta--alerta"); cinta.dataset.estado = est;
+    $(".cinta__rotulo").textContent = tituloEst;
+    $("#cinta-texto").textContent = D.mensajeEstado || "";
+    $("#cinta-fecha").textContent = "Ver recomendaciones";
+  } else if (comunicados.length) {
     $("#cinta").hidden = false;
     $("#cinta-texto").textContent = comunicados[0].titulo;
     $("#cinta-fecha").textContent = fechaLarga(comunicados[0].fecha);
@@ -519,7 +527,7 @@
   var avisos = (D.avisos || []).slice().sort(function (a, b) { return a.fecha < b.fecha ? 1 : -1; });
   $("#lista-avisos").innerHTML = avisos.length ? avisos.map(function (a) {
     var f = fecha(a.fecha);
-    return '<li class="aviso' + (f < hoy ? " aviso--pasado" : "") + '"><p class="aviso__fecha"><b>' + f.getDate() + "</b><span>" + MESES[f.getMonth()].slice(0, 3) + " " + f.getFullYear() + "</span></p>" +
+    return '<li class="aviso' + (a.vigente ? " aviso--vigente" : f < hoy ? " aviso--pasado" : "") + '"><p class="aviso__fecha"><b>' + f.getDate() + "</b><span>" + MESES[f.getMonth()].slice(0, 3) + " " + f.getFullYear() + "</span></p>" +
       "<div><h3>" + esc(a.titulo) + "</h3><p>" + esc(a.detalle) + (a.sectores ? " Sectores: " + esc(a.sectores) + "." : "") + "</p></div></li>";
   }).join("") : '<li class="avisos__vacio">No hay cortes programados. Si su casa se queda sin agua, repórtelo en el formulario de atención.</li>';
 
@@ -536,6 +544,7 @@
       io.observe(arco);
     } else llenarArco();
   } else {
+    arco.style.visibility = "hidden";
     $("#irca-texto").textContent = "El resultado del mes se publicará aquí cuando llegue el informe del laboratorio.";
   }
 
