@@ -114,13 +114,13 @@ for n, ref in [("Altitud","$B$7"),("ConsBasico","$B$15"),("LimCompl","$B$17"),("
 
 # ================================ IPC ======================================
 wi = wb.create_sheet("IPC")
-title(wi, "SERIE OFICIAL DEL IPC (base dic-2018 = 100)", "Fuente: DANE, publicado por el Banco de la República (series 15000 IPC total y 15315 IPC sin alimentos ni regulados), consultado el 31-oct-2026. Cada mes agregue el nuevo dato (en azul) o use la macro ActualizarIPC. El DANE publica cerca del día 8 de cada mes.", 8)
+title(wi, "SERIE OFICIAL DEL IPC (base dic-2018 = 100)", "Fuente: DANE, publicado por el Banco de la República (series 15000 IPC total y 15315 IPC sin alimentos ni regulados), consultado el 19-nov-2026. Cada mes agregue el nuevo dato (en azul) o use la macro ActualizarIPC. El DANE publica cerca del día 8 de cada mes.", 8)
 hdr(wi, 4, ["Mes", "IPC total", "IPC sin alimentos ni regulados", "Var. mensual", "Var. año corrido", "Var. 12 meses", "Fuente", "Acum. desde mes base (Acu/Alc)"])
 ipc = [("2024-12",144.88,133.4),("2025-01",146.24,134.24),("2025-02",147.9,135.28),("2025-03",148.68,135.93),("2025-04",149.66,136.71),
 ("2025-05",150.14,137.12),("2025-06",150.3,137.52),("2025-07",150.71,137.83),("2025-08",150.99,138.15),("2025-09",151.48,138.63),
 ("2025-10",151.76,139.04),("2025-11",151.87,139.38),("2025-12",152.27,140.09),("2026-01",154.07,141.47),("2026-02",155.73,142.75),
 ("2026-03",156.94,143.8),("2026-04",158.17,144.62),("2026-05",158.91,145.32),("2026-06",159.53,145.78),("2026-07",159.79,146.05),
-("2026-08",160.42,146.61),("2026-09",161.0,146.99)]
+("2026-08",160.42,146.61),("2026-09",161.0,146.99),("2026-10",161.32,147.26)]
 def eom(y, m):
     n = dt.date(y + (m == 12), m % 12 + 1, 1); return n - dt.timedelta(days=1)
 months = []
@@ -479,7 +479,7 @@ hall = [
  ("4. Ejemplo del manual básico", "El manual dice que $11.164 (mar-abr) × 1,0477 = $11.696 y también que sube a $12.293. La base correcta es ene-feb: $11.732,86 × 1,0477 = $12.292,52."),
  ("5. Subsidio residencial único", "Acueducto y alcantarillado tienen una sola tarifa 'Residencial' con 45%/50% de subsidio en el básico. La ley permite máximo 40% al estrato 2 y 15% al estrato 3. Si hay usuarios de estrato 2 o 3, se necesitan tarifas por estrato."),
  ("6. Aforados: dos cálculos", "Consolidado: $79.392,84/t + VIAT $4.075,13 por factura. Archivo de aforados: $97.913,02/t con VIAT incluido (≈ +23%). La Junta debe definir uno. El Consolidado advierte que el VIAT no se venía cobrando."),
- ("7. Próxima actualización", "Con IPC a sep-2026 (161,00) el acumulado desde jun-2026 (159,53) es 0,92%: aún NO se puede actualizar. Seguir cargando el IPC mensual."),
+ ("7. Próxima actualización", "Con IPC a oct-2026 (161,32) el acumulado desde jun-2026 (159,53) es 1,12%: aún NO se puede actualizar. Seguir cargando el IPC mensual."),
 ]
 for i, (a, b) in enumerate(hall):
     rr = r1 + 1 + i; txt(wn.cell(rr, 1), a, bold=True, wrap=True); txt(wn.cell(rr, 2), b, wrap=True); wn.merge_cells(start_row=rr, start_column=2, end_row=rr, end_column=4); wn.row_dimensions[rr].height = 44
@@ -523,7 +523,7 @@ for i, line in enumerate(code):
 wm.column_dimensions["A"].width = 140
 
 # ================================ INICIO ===================================
-title(ws0, "MANUAL TARIFARIO INTEGRAL — TRIPLE A DEL BARRIO CARTAGENA (Facatativá)", "Acueducto, Alcantarillado y Aseo. Libro formulado: actualización por IPC, validaciones legales (CRA / Ley 142 / Ley 1450), simulador de factura, aforados y tablas para la resolución. Preparado el 31-oct-2026 con IPC hasta sep-2026.", 4)
+title(ws0, "MANUAL TARIFARIO INTEGRAL — TRIPLE A DEL BARRIO CARTAGENA (Facatativá)", "Acueducto, Alcantarillado y Aseo. Libro formulado: actualización por IPC, validaciones legales (CRA / Ley 142 / Ley 1450), simulador de factura, aforados y tablas para la resolución. Preparado el 31-oct-2026 con IPC hasta oct-2026.", 4)
 txt(ws0.cell(4, 1), "PANEL DE ESTADO", bold=True, fill=NAVY, color="FFFFFF"); ws0.merge_cells("A4:D4")
 panel = [("Último IPC cargado", "=MesFinal", MES), ("IPC total del último mes", "=INDEXACION!B7", '0.00'),
          ("Mes base (última actualización)", "=MesBase", MES), ("Variación acumulada Acueducto/Alcantarillado", "=VarAcuAlc", PCT),
