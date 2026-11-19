@@ -176,6 +176,24 @@
           </div>
           <a class="boton boton--agua" id="aseo-solicitar" href="#" target="_blank" rel="noopener">Quiero el servicio de aseo</a>
         </aside>
+
+        <figure class="rutas" id="rutas">
+          <figcaption class="rutas__texto">
+            <h3>Rutas de recolección en el barrio</h3>
+            <p>Dos rutas recorren el Barrio Cartagenita los lunes, miércoles y viernes desde las 6:00 a. m. La ruta 1 (verde) cubre el sector norte y oriente; la ruta 2 (azul), el occidente y el sur.</p>
+            <p class="rutas__consejo">Saque la bolsa poco antes de que pase el carro, nunca la noche anterior.</p>
+            <div class="rutas__botones">
+              <button type="button" class="boton boton--linea" id="rutas-ampliar">Ver mapa en grande</button>
+              <a class="boton boton--linea" href="img/rutas-aseo.jpg" download="rutas-recoleccion-aseo-cartagenita.jpg">Descargar mapa</a>
+            </div>
+          </figcaption>
+          <button type="button" class="rutas__mapa" id="rutas-mapa" aria-label="Ampliar el mapa de rutas de recolección">
+            <img src="img/rutas-aseo-800.webp" srcset="img/rutas-aseo-800.webp 1000w, img/rutas-aseo.webp 1672w" sizes="(max-width: 1000px) 100vw, 760px"
+              width="1672" height="941" loading="lazy" decoding="async"
+              alt="Mapa de rutas de recolección de aseo del Barrio Cartagenita en Facatativá: ruta 1 en verde por el sector norte y oriente, ruta 2 en azul por el sector occidente y sur. Lunes, miércoles y viernes desde las 6:00 a. m., 457 suscriptores en el barrio.">
+            <span class="rutas__lupa" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4M11 8v6M8 11h6"/></svg></span>
+          </button>
+        </figure>
       </div>
     </section>
 
@@ -371,6 +389,12 @@
       <span class="sr">Abrir menú de ayuda</span>
     </button>
   </div>
+
+  <dialog class="visor" id="visor" aria-label="Mapa de rutas de recolección">
+    <form method="dialog"><button class="visor__cerrar" aria-label="Cerrar">×</button></form>
+    <img src="img/rutas-aseo.webp" alt="Mapa de rutas de recolección de aseo del Barrio Cartagenita, en tamaño grande." width="1672" height="941">
+    <p class="visor__ayuda">Deslice con el dedo para recorrer todo el mapa.</p>
+  </dialog>
 
   <dialog class="dialogo" id="dialogo" aria-labelledby="dialogo-titulo">
     <form method="dialog"><button class="dialogo__cerrar" aria-label="Cerrar">×</button></form>

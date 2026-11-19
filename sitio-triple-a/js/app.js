@@ -239,6 +239,14 @@
     document.addEventListener("click", function (e) { if (!panel.hidden && !caja.contains(e.target)) abrir(false); });
   })();
 
+  /* ---------- Visor del mapa de rutas ---------- */
+  (function () {
+    var visor = $("#visor"); if (!visor) return;
+    var abrirVisor = function () { if (visor.showModal) visor.showModal(); else visor.setAttribute("open", ""); };
+    ["#rutas-mapa", "#rutas-ampliar"].forEach(function (s) { var b = $(s); if (b) b.addEventListener("click", abrirVisor); });
+    visor.addEventListener("click", function (e) { if (e.target === visor) visor.close(); });
+  })();
+
   /* ---------- Recolección ---------- */
   $("#recoleccion").innerHTML = (D.recoleccion || []).map(function (r) { return "<li><b>" + esc(r.dia) + "</b>" + esc(r.tipo) + "</li>"; }).join("");
 

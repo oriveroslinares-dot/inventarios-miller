@@ -146,10 +146,11 @@ window.TRIPLE_A = {
   },
 
   // ---------- RECOLECCIÓN DE ASEO (POR CONFIRMAR) ----------
+  // Barrio Cartagenita: 2 rutas, desde las 6:00 a. m. (ver img/rutas-aseo.webp)
   recoleccion: [
-    { dia: "Lunes", tipo: "Residuos ordinarios" },
-    { dia: "Miércoles", tipo: "Material aprovechable" },
-    { dia: "Viernes", tipo: "Residuos ordinarios" }
+    { dia: "Lunes", tipo: "desde las 6:00 a. m." },
+    { dia: "Miércoles", tipo: "desde las 6:00 a. m." },
+    { dia: "Viernes", tipo: "desde las 6:00 a. m." }
   ],
 
   // ---------- CALIDAD DEL AGUA (IRCA) ----------

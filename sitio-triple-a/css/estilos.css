@@ -182,6 +182,29 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 @media (max-width: 1000px) { .aseo-banda { grid-template-columns: auto 1fr; } .aseo-banda .boton { grid-column: 1 / -1; justify-self: start; } }
 @media (max-width: 720px) { .aseo-banda { grid-template-columns: 1fr; } .aseo-banda__ilus { width: 64px; height: 64px; } .aseo-banda .boton { width: 100%; } }
 
+/* ---------- Mapa de rutas de aseo ---------- */
+.rutas { margin: 1.25rem 0 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr); gap: clamp(1.5rem, 4vw, 3rem); align-items: center; padding: clamp(1.4rem, 3vw, 2rem); border-radius: 20px; background: #E7F6E2; }
+.rutas__texto h3 { font-size: clamp(1.5rem, 2.6vw, 1.9rem); font-variation-settings: "wdth" 106; color: #1F6B14; }
+.rutas__texto p { color: var(--gris); margin-top: .7rem; }
+.rutas__consejo { padding: .7rem .9rem; border-radius: 10px; background: #fff; color: var(--tinta) !important; font-size: .98rem; }
+.rutas__botones { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.2rem; }
+.rutas__botones .boton { border-color: #1F6B14; color: #1F6B14; padding: .75rem 1.2rem; }
+.rutas__botones .boton:hover { background: #1F6B14; color: #fff; }
+.rutas__mapa { position: relative; display: block; padding: 0; border: 0; border-radius: 14px; overflow: hidden; cursor: zoom-in; background: #0d2a1c; box-shadow: 0 30px 50px -30px rgb(10 50 20 / .6); }
+.rutas__mapa img { width: 100%; height: auto; transition: transform .6s var(--facil); }
+.rutas__mapa:hover img { transform: scale(1.03); }
+.rutas__lupa { position: absolute; right: .8rem; bottom: .8rem; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: #fff; box-shadow: 0 8px 20px -6px rgb(0 0 0 / .4); transition: transform .25s var(--facil); }
+.rutas__mapa:hover .rutas__lupa { transform: scale(1.1); }
+.rutas__lupa svg { width: 24px; height: 24px; fill: none; stroke: #1F6B14; stroke-width: 2.4; stroke-linecap: round; }
+.visor { width: min(96vw, 1680px); max-width: none; max-height: 94svh; padding: 0; border: 0; border-radius: 12px; background: #0d2a1c; overflow: auto; }
+.visor::backdrop { background: rgb(6 20 12 / .85); backdrop-filter: blur(4px); }
+.visor[open] { animation: abrir .35s var(--facil); }
+.visor img { display: block; width: 100%; min-width: 900px; height: auto; }
+.visor__cerrar { position: sticky; float: right; top: .6rem; margin: .6rem .6rem -3.4rem 0; z-index: 2; width: 46px; height: 46px; border: 0; border-radius: 50%; background: #fff; font-size: 1.7rem; cursor: pointer; color: var(--tinta); box-shadow: 0 6px 16px rgb(0 0 0 / .35); }
+.visor__ayuda { position: sticky; left: 0; margin: 0; padding: .7rem 1rem; color: #DDF3D6; font-size: .95rem; text-align: center; }
+@media (min-width: 1000px) { .visor img { min-width: 0; } .visor__ayuda { display: none; } }
+@media (max-width: 1000px) { .rutas { grid-template-columns: 1fr; } .rutas__mapa { order: -1; } }
+
 /* ---------- Olas entre secciones ---------- */
 .con-ola { position: relative; --ola-color: var(--noche); }
 .con-ola::before { content: ""; position: absolute; left: 0; right: 0; top: -27px; height: 28px; pointer-events: none; background: var(--ola-color);
