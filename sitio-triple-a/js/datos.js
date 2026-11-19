@@ -78,7 +78,7 @@ window.TRIPLE_A = {
   junta: [
     { nombre: "María Elvira Maldonado Martínez", cargo: "Presidente", foto: "" },
     { nombre: "Alba Rocío García Gómez", cargo: "Vicepresidente", foto: "" },
-    { nombre: "Olga Lucía Chavarro Santana", cargo: "Secretario", foto: "" },
+    { nombre: "Yenny Martínez", cargo: "Secretaria", foto: "" },   // actualizado por la empresa (el RUPS de oct. 2026 registra a Olga Lucía Chavarro Santana)
     { nombre: "Nubia Cristina Cruz Forero", cargo: "Tesorera", foto: "" },
     { nombre: "Daniel Duarte Duarte", cargo: "Vocal", foto: "" },
     { nombre: "José Enrique Caicedo Castañeda", cargo: "Vocal", foto: "" },

@@ -258,6 +258,12 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .destacada .foto__marco { min-height: 0; max-height: none; aspect-ratio: 3 / 4; }
 }
 
+/* ---------- Video: el barrio desde el aire ---------- */
+.aereo__marco { margin: 0; }
+.aereo__video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 20px; background: #000; box-shadow: 0 40px 80px -40px rgb(0 0 0 / .8); object-fit: cover; }
+.aereo__credito { margin-top: .9rem; font-size: .9rem; color: #b9d3ec; }
+.aereo__credito a { color: #fff; }
+
 /* ---------- Olas entre secciones ---------- */
 .con-ola { position: relative; --ola-color: var(--noche); }
 .con-ola::before { content: ""; position: absolute; left: 0; right: 0; top: -27px; height: 28px; pointer-events: none; background: var(--ola-color);

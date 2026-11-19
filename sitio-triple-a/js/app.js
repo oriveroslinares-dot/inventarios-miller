@@ -407,6 +407,17 @@
     visor.addEventListener("click", function (e) { if (e.target === visor) visor.close(); });
   })();
 
+  /* ---------- Video aéreo: se reproduce solo (sin sonido) cuando está a la vista ---------- */
+  (function () {
+    var v = $("#video-aereo"); if (!v || quieto || !("IntersectionObserver" in window)) return;
+    var pausadoPorUsuario = false;
+    v.addEventListener("pause", function () { if (v.dataset.auto !== "1") pausadoPorUsuario = true; v.dataset.auto = ""; });
+    new IntersectionObserver(function (en) {
+      if (en[0].isIntersecting) { if (!pausadoPorUsuario) { v.preload = "auto"; var p = v.play(); if (p && p.catch) p.catch(function () {}); } }
+      else if (!v.paused) { v.dataset.auto = "1"; v.pause(); }
+    }, { threshold: 0.4 }).observe(v);
+  })();
+
   /* ---------- Recolección ---------- */
   $("#recoleccion").innerHTML = (D.recoleccion || []).map(function (r) { return "<li><b>" + esc(r.dia) + "</b>" + esc(r.tipo) + "</li>"; }).join("");
 

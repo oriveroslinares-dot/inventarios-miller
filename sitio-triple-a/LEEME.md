@@ -79,3 +79,9 @@ En `js/datos.js`:
 - `tituloEstado` es el texto corto de la etiqueta (por ejemplo, "Alerta naranja").
 - En `avisos`, `vigente: true` mantiene el aviso destacado en naranja aunque pase su fecha.
 - Cuando termine la alerta: cambie `estado` a `"normal"`, ponga el mensaje "Acueducto, alcantarillado y aseo funcionan con normalidad." y borre el aviso.
+
+## Video del barrio
+
+El video está en `video/barrio-aereo.mp4` (sin audio, comprimido) con su imagen de portada `img/barrio-aereo-poster.webp`.
+Se reproduce solo y sin sonido cuando el visitante llega a esa parte de la página.
+Crédito: @theodron_29_05 (TikTok). Conviene tener la autorización del autor para publicarlo.
