@@ -384,6 +384,29 @@
     document.addEventListener("fullscreenchange", recalcular);
   })();
 
+  /* ---------- Galería: trabajando en el barrio ---------- */
+  (function () {
+    var fotos = D.galeria || [], sec = $("#galeria"); if (!sec || !fotos.length) return;
+    sec.hidden = false;
+    $("#galeria-lista").innerHTML = fotos.map(function (f, i) {
+      return '<li class="galeria__item' + (i === 0 ? " destacada" : "") + '"><button type="button" class="foto" data-i="' + i + '">' +
+        '<span class="foto__marco"><img src="' + esc(f.foto) + '" alt="' + esc(f.titulo) + '" loading="lazy" decoding="async">' +
+        (f.servicio ? '<span class="foto__etiqueta">' + esc(f.servicio) + "</span>" : "") + "</span>" +
+        '<span class="foto__texto"><span class="foto__titulo">' + esc(f.titulo) + "</span>" + (f.descripcion ? '<span class="foto__desc">' + esc(f.descripcion) + "</span>" : "") +
+        (f.fecha ? '<time class="foto__fecha" datetime="' + esc(f.fecha) + '">' + fechaLarga(f.fecha) + "</time>" : "") +
+        '<span class="foto__ver">Ver foto completa</span></span></button></li>';
+    }).join("");
+    var visor = $("#foto-visor");
+    $("#galeria-lista").addEventListener("click", function (e) {
+      var b = e.target.closest(".foto"); if (!b) return;
+      var f = fotos[+b.dataset.i];
+      $("#foto-visor-img").src = f.fotoGrande || f.foto; $("#foto-visor-img").alt = f.titulo;
+      $("#foto-visor-titulo").textContent = f.titulo; $("#foto-visor-desc").textContent = f.descripcion || "";
+      if (visor.showModal) visor.showModal(); else visor.setAttribute("open", "");
+    });
+    visor.addEventListener("click", function (e) { if (e.target === visor) visor.close(); });
+  })();
+
   /* ---------- Recolección ---------- */
   $("#recoleccion").innerHTML = (D.recoleccion || []).map(function (r) { return "<li><b>" + esc(r.dia) + "</b>" + esc(r.tipo) + "</li>"; }).join("");
 

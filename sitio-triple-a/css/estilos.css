@@ -224,6 +224,40 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .mapa__ayuda { top: .6rem; bottom: auto; left: .6rem; right: .6rem; font-size: .8rem; text-align: center; }
 }
 
+/* ---------- Galería: trabajando en el barrio ---------- */
+.galeria__lista { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); gap: 1.2rem; }
+.galeria__item.destacada { grid-column: 1 / -1; }
+.foto { display: grid; width: 100%; padding: 0; border: 0; border-radius: 18px; overflow: hidden; background: #fff; text-align: left; font: inherit; color: inherit; cursor: zoom-in; box-shadow: 0 24px 50px -35px rgb(6 33 74 / .55); border: 1px solid var(--linea); transition: transform .3s var(--facil), box-shadow .3s; }
+.foto:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -30px rgb(6 33 74 / .55); }
+.foto__marco { position: relative; overflow: hidden; aspect-ratio: 4 / 3; background: var(--niebla); }
+.foto__marco img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; transition: transform .7s var(--facil); }
+.foto:hover .foto__marco img { transform: scale(1.04); }
+.foto__etiqueta { position: absolute; left: .9rem; top: .9rem; padding: .3rem .75rem; border-radius: 999px; background: rgb(255 255 255 / .92); color: var(--hondo); font-weight: 700; font-size: .85rem; }
+.foto__texto { padding: 1.2rem 1.3rem 1.4rem; }
+.foto__titulo { display: block; font-family: var(--display); font-weight: 800; font-size: 1.35rem; font-variation-settings: "wdth" 100; color: var(--hondo); line-height: 1.15; }
+.foto__desc { display: block; color: var(--gris); margin-top: .5rem; font-size: 1rem; }
+.foto__fecha { display: block; margin-top: .6rem; font-size: .9rem; color: var(--gris); }
+/* La foto destacada: imagen vertical a la izquierda, texto a la derecha */
+.destacada .foto { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; }
+.destacada .foto__marco { aspect-ratio: auto; min-height: 520px; max-height: 640px; }
+.destacada .foto__texto { align-self: center; padding: clamp(1.6rem, 4vw, 3rem); }
+.destacada .foto__titulo { display: block; font-family: var(--display); font-weight: 800; line-height: 1.15; font-size: clamp(1.7rem, 3.2vw, 2.4rem); font-variation-settings: "wdth" 106; }
+.destacada .foto__desc { font-size: 1.1rem; }
+.destacada .foto__ver { display: inline-flex; margin-top: 1.4rem; font-weight: 700; color: var(--hondo); text-decoration: underline; }
+.foto__ver { display: none; }
+.foto-visor { width: auto; max-width: min(94vw, 900px); max-height: 94svh; padding: 0; border: 0; border-radius: 14px; background: #0B1626; color: #fff; overflow: auto; }
+.foto-visor::backdrop { background: rgb(6 20 40 / .85); backdrop-filter: blur(4px); }
+.foto-visor[open] { animation: abrir .35s var(--facil); }
+.foto-visor img { display: block; max-width: 100%; max-height: 80svh; margin: 0 auto; }
+.foto-visor__texto { padding: 1rem 1.3rem 1.3rem; }
+.foto-visor__texto h2 { font-size: 1.3rem; font-variation-settings: "wdth" 100; }
+.foto-visor__texto p { color: #B9D3EC; margin-top: .3rem; font-size: .98rem; }
+.foto-visor__cerrar { position: absolute; top: .7rem; right: .7rem; z-index: 2; width: 44px; height: 44px; border: 0; border-radius: 50%; background: #fff; font-size: 1.6rem; cursor: pointer; color: var(--tinta); box-shadow: 0 6px 16px rgb(0 0 0 / .35); }
+@media (max-width: 720px) {
+  .destacada .foto { grid-template-columns: 1fr; }
+  .destacada .foto__marco { min-height: 0; max-height: none; aspect-ratio: 3 / 4; }
+}
+
 /* ---------- Olas entre secciones ---------- */
 .con-ola { position: relative; --ola-color: var(--noche); }
 .con-ola::before { content: ""; position: absolute; left: 0; right: 0; top: -27px; height: 28px; pointer-events: none; background: var(--ola-color);

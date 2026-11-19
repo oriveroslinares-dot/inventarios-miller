@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/estilos.css?v=20261119c">
+  <link rel="stylesheet" href="css/estilos.css?v=20261119d">
   <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
@@ -204,6 +204,17 @@
             <p class="mapa__ayuda">Pellizque o toque dos veces para acercar. Arrastre para moverse.</p>
           </div>
         </figure>
+      </div>
+    </section>
+
+    <!-- ===================== GALERÍA: TRABAJANDO EN EL BARRIO ===================== -->
+    <section class="seccion galeria" id="galeria" aria-labelledby="t-galeria" hidden>
+      <div class="contenedor">
+        <div class="cabeza-doble">
+          <h2 id="t-galeria" class="titulo">Trabajando en el barrio</h2>
+          <p class="intro">El mantenimiento que no se ve, pero que mantiene el agua llegando y las calles limpias. Toque una foto para verla en grande.</p>
+        </div>
+        <ul class="galeria__lista" id="galeria-lista"></ul>
       </div>
     </section>
 
@@ -400,6 +411,12 @@
     </button>
   </div>
 
+  <dialog class="foto-visor" id="foto-visor" aria-labelledby="foto-visor-titulo">
+    <form method="dialog"><button class="foto-visor__cerrar" aria-label="Cerrar">×</button></form>
+    <img id="foto-visor-img" src="" alt="">
+    <div class="foto-visor__texto"><h2 id="foto-visor-titulo"></h2><p id="foto-visor-desc"></p></div>
+  </dialog>
+
   <dialog class="dialogo" id="dialogo" aria-labelledby="dialogo-titulo">
     <form method="dialog"><button class="dialogo__cerrar" aria-label="Cerrar">×</button></form>
     <p class="dialogo__fecha" id="dialogo-fecha"></p>
@@ -413,7 +430,7 @@
        Si cambia app.js o estilos.css, suba también el número de versión (v=). */
     (function () {
       var t = Math.floor(Date.now() / 600000);
-      ["js/datos.js?t=" + t, "js/app.js?v=20261119c"].forEach(function (src) {
+      ["js/datos.js?t=" + t, "js/app.js?v=20261119d"].forEach(function (src) {
         var s = document.createElement("script"); s.src = src; s.async = false; document.body.appendChild(s);
       });
     })();

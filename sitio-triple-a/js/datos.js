@@ -86,6 +86,20 @@ window.TRIPLE_A = {
   ],
   auditorExterno: { nombre: "AD Soluciones Integrales S.A.S.", vigencia: "abril de 2026 a abril de 2027" },
 
+  // ---------- GALERÍA "TRABAJANDO EN EL BARRIO" ----------
+  // Suba las fotos a img/galeria/. "foto" es la versión liviana y "fotoGrande" la que se abre al ampliar.
+  // fecha es opcional (AAAA-MM-DD). La primera foto de la lista sale destacada.
+  galeria: [
+    {
+      foto: "img/galeria/mantenimiento-alcantarillado-600.webp",
+      fotoGrande: "img/galeria/mantenimiento-alcantarillado-900.webp",
+      titulo: "Mantenimiento de la red de alcantarillado",
+      descripcion: "Limpieza de pozos y tuberías con equipo de succión a presión, para evitar taponamientos y reboses en las calles del barrio.",
+      servicio: "Alcantarillado",
+      fecha: ""
+    }
+  ],
+
   // ---------- NOTICIAS ----------
   // tipo: "Comunicado" (oficial) o "Noticia". El texto completo se abre al pulsar "Leer".
   // facebook: pegue el enlace de la publicación en Facebook para mostrar el botón "Ver en Facebook".
