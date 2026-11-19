@@ -11,3 +11,14 @@ Options -Indexes
     Order allow,deny
     Deny from all
 </FilesMatch>
+
+# Que los navegadores revisen si hay una versión nueva de la página antes de usar la copia guardada.
+# Las imágenes sí pueden guardarse una semana para que la página cargue rápido.
+<IfModule mod_headers.c>
+    <FilesMatch "\.(html|php|css|js)$">
+        Header set Cache-Control "no-cache"
+    </FilesMatch>
+    <FilesMatch "\.(webp|jpg|jpeg|png|svg|pdf)$">
+        Header set Cache-Control "public, max-age=604800"
+    </FilesMatch>
+</IfModule>
