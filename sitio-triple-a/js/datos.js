@@ -5,13 +5,20 @@
    ========================================================== */
 window.TRIPLE_A = {
   empresa: "Triple A del Barrio Cartagena",
-  razonSocial: "Asociación de Socios Suscriptores del Barrio Cartagena", // POR CONFIRMAR: nombre exacto del RUT
-  nit: "",                         // POR CONFIRMAR: ejemplo "900.000.000-0"
+  // Datos oficiales tomados del certificado RUPS (Superservicios), actualizado el 27 de octubre de 2026
+  razonSocial: "Asociación de Socios Suscriptores del Servicio de Acueducto, Alcantarillado y Aseo del Barrio Cartagena Facatativá",
+  sigla: "Triple A del Barrio Cartagena Facatativá E.S.P.",
+  nit: "832.001.989-1",
+  fundacion: "1997-03-09",
+  inicioOperaciones: "1997-08-15",
+  rupsFecha: "2026-10-27",
+  suscriptores: { acueducto: 1438, alcantarillado: 1420, aseo: 2882 },
   lema: "Construimos servicio, construimos comunidad.",
 
   // ---------- CONTACTO ----------
-  direccion: "Barrio Cartagena, Facatativá, Cundinamarca", // POR CONFIRMAR: dirección de la oficina
+  direccion: "Calle 3 Sur No. 2-78, Barrio Cartagena, Facatativá, Cundinamarca",
   telefono: "315 744 3635",
+  telefonoFijo: "(601) 843 0911",
   whatsapp: "573157443635",        // POR CONFIRMAR que esta línea tenga WhatsApp
   correoPqrs: "pqrs@tripleafacatativa.com.co",
   correoGeneral: "aaacartagena@tripleafacatativa.com.co",
@@ -46,10 +53,29 @@ window.TRIPLE_A = {
     // { fecha: "2026-12-02", titulo: "Lavado de tanque", detalle: "Suspensión de 8:00 a. m. a 2:00 p. m.", sectores: "Todo el barrio" }
   ],
 
-  // ---------- COMUNICADOS ----------
-  // El texto completo se muestra al pulsar "Leer". Puede adjuntar un PDF en "archivo".
-  comunicados: [
+  // ---------- JUNTA DIRECTIVA Y REPRESENTANTE LEGAL ----------
+  // Fuente: certificado RUPS del 27 de octubre de 2026. Por privacidad NO se publican números de cédula.
+  // "foto" es opcional: suba la imagen a /img y escriba, por ejemplo, "img/junta/maria-elvira.jpg".
+  representanteLegal: { nombre: "María Elvira Maldonado Martínez", cargo: "Representante legal", desde: "2026-02-22", foto: "" },
+  suplente: { nombre: "Alba Rocío García Gómez", cargo: "Representante legal suplente", foto: "" },
+  junta: [
+    { nombre: "María Elvira Maldonado Martínez", cargo: "Presidente", foto: "" },
+    { nombre: "Alba Rocío García Gómez", cargo: "Vicepresidente", foto: "" },
+    { nombre: "Olga Lucía Chavarro Santana", cargo: "Secretario", foto: "" },
+    { nombre: "Nubia Cristina Cruz Forero", cargo: "Miembro de junta", foto: "" },   // POR CONFIRMAR: en el RUPS figura como "Otro" (¿tesorería, fiscal?)
+    { nombre: "Daniel Duarte Duarte", cargo: "Vocal", foto: "" },
+    { nombre: "José Enrique Caicedo Castañeda", cargo: "Vocal", foto: "" },
+    { nombre: "Luz Stella Carrasco Alarcón", cargo: "Vocal", foto: "" }
+  ],
+  auditorExterno: { nombre: "AD Soluciones Integrales S.A.S.", vigencia: "abril de 2026 a abril de 2027" },
+
+  // ---------- NOTICIAS ----------
+  // tipo: "Comunicado" (oficial) o "Noticia". El texto completo se abre al pulsar "Leer".
+  // facebook: pegue el enlace de la publicación en Facebook para mostrar el botón "Ver en Facebook".
+  // archivo: PDF opcional en /documentos.
+  noticias: [
     {
+      tipo: "Comunicado",
       fecha: "2026-05-12",
       titulo: "No hay incremento en la tarifa de aprovechamiento",
       resumen: "Aclaramos a la comunidad que actualmente no se está aplicando ningún aumento en el cobro de aprovechamiento.",
@@ -58,6 +84,20 @@ window.TRIPLE_A = {
         "Cualquier modificación tarifaria debe estar previamente regulada y aprobada conforme a la normatividad de la Superintendencia de Servicios Públicos Domiciliarios. La empresa adelanta consultas ante esa entidad para verificar la normativa vigente.",
         "Para resolver inquietudes o solicitar aclaraciones, comuníquese a la línea 315 744 3635, de lunes a viernes de 8:00 a. m. a 5:00 p. m., o al correo aaacartagena@tripleafacatativa.com.co."
       ],
+      facebook: "",
+      archivo: ""
+    },
+    {
+      tipo: "Noticia",
+      fecha: "2026-10-27",
+      titulo: "Actualizamos nuestro registro ante la Superservicios",
+      resumen: "Nuestro Registro Único de Prestadores (RUPS) quedó actualizado y la empresa figura como prestador operativo de acueducto, alcantarillado y aseo.",
+      texto: [
+        "El 27 de octubre de 2026 la Superintendencia de Servicios Públicos Domiciliarios aprobó la actualización de nuestro Registro Único de Prestadores de Servicios Públicos (RUPS).",
+        "El registro confirma que la asociación está operativa desde 1997 y presta los servicios de acueducto, alcantarillado y aseo a los suscriptores del Barrio Cartagena, en Facatativá.",
+        "También quedaron actualizados los datos de la representante legal, la junta directiva y el auditor externo de gestión y resultados. Puede consultarlos en la sección Quiénes somos."
+      ],
+      facebook: "",
       archivo: ""
     }
   ],

@@ -86,7 +86,7 @@
   $("#estado-mensaje").textContent = D.mensajeEstado || "";
 
   /* ---------- Cinta del último comunicado ---------- */
-  var comunicados = (D.comunicados || []).slice().sort(function (a, b) { return a.fecha < b.fecha ? 1 : -1; });
+  var comunicados = (D.noticias || D.comunicados || []).slice().sort(function (a, b) { return a.fecha < b.fecha ? 1 : -1; });
   if (comunicados.length) {
     $("#cinta").hidden = false;
     $("#cinta-texto").textContent = comunicados[0].titulo;
@@ -272,22 +272,74 @@
   });
   pintarDocs();
 
-  /* ---------- Comunicados + diálogo ---------- */
-  var dlg = $("#dialogo");
-  $("#lista-comunicados").innerHTML = comunicados.length ? comunicados.map(function (c, i) {
-    return '<button type="button" class="comunicado" data-i="' + i + '"><time datetime="' + esc(c.fecha) + '">' + fechaLarga(c.fecha) + "</time>" +
-      "<h3>" + esc(c.titulo) + "</h3><p>" + esc(c.resumen) + '</p><span class="comunicado__leer">Leer comunicado</span></button>';
-  }).join("") : '<p class="intro">Aún no hay comunicados publicados.</p>';
-  $("#lista-comunicados").addEventListener("click", function (e) {
-    var b = e.target.closest(".comunicado"); if (!b) return;
+  /* ---------- Noticias + diálogo ---------- */
+  var dlg = $("#dialogo"), filtroNot = "Todas";
+  var MES3 = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+  var tiposNot = ["Todas"];
+  comunicados.forEach(function (n) { var t = n.tipo || "Comunicado"; if (tiposNot.indexOf(t) < 0) tiposNot.push(t); });
+  var filtrosNot = $("#noticias-filtros");
+  filtrosNot.innerHTML = tiposNot.length > 2 ? tiposNot.map(function (t) {
+    return '<button type="button" class="chip" aria-pressed="' + (t === "Todas") + '" data-t="' + esc(t) + '">' + esc(t === "Comunicado" ? "Comunicados" : t === "Noticia" ? "Noticias" : t) + "</button>";
+  }).join("") : "";
+  function pintarNoticias() {
+    var lista = comunicados.map(function (n, i) { return { n: n, i: i }; }).filter(function (x) { return filtroNot === "Todas" || (x.n.tipo || "Comunicado") === filtroNot; });
+    $("#lista-noticias").innerHTML = lista.length ? lista.map(function (x) {
+      var n = x.n, f = fecha(n.fecha), tipo = n.tipo || "Comunicado";
+      return '<article class="noticia' + (tipo === "Comunicado" ? " noticia--comunicado" : "") + '">' +
+        '<p class="noticia__fecha"><b>' + f.getDate() + "</b><span>" + MES3[f.getMonth()] + " " + f.getFullYear() + "</span></p>" +
+        '<div><span class="noticia__tipo">' + esc(tipo) + "</span><h3>" + esc(n.titulo) + "</h3><p>" + esc(n.resumen) + '</p><div class="noticia__acciones">' +
+        ((n.texto && n.texto.length) ? '<button type="button" class="noticia__accion" data-i="' + x.i + '">Leer completo</button>' : "") +
+        (n.facebook ? '<a class="noticia__accion noticia__accion--fb" href="' + esc(n.facebook) + '" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1Z"/></svg>Ver en Facebook</a>' : "") +
+        (n.archivo ? '<a class="noticia__accion" href="' + esc(n.archivo) + '" download>Descargar PDF</a>' : "") +
+        "</div></div></article>";
+    }).join("") : '<p class="noticias__vacio">Aún no hay publicaciones en esta categoría.</p>';
+  }
+  pintarNoticias();
+  filtrosNot.addEventListener("click", function (e) {
+    var b = e.target.closest(".chip"); if (!b) return;
+    filtrosNot.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", c === b); });
+    filtroNot = b.dataset.t; conTransicion(pintarNoticias);
+  });
+  $("#lista-noticias").addEventListener("click", function (e) {
+    var b = e.target.closest("button.noticia__accion"); if (!b) return;
     var c = comunicados[+b.dataset.i];
-    $("#dialogo-fecha").textContent = fechaLarga(c.fecha);
+    $("#dialogo-fecha").textContent = (c.tipo || "Comunicado") + ". " + fechaLarga(c.fecha);
     $("#dialogo-titulo").textContent = c.titulo;
     $("#dialogo-texto").innerHTML = (c.texto || [c.resumen]).map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("");
     var pdf = $("#dialogo-pdf"); pdf.hidden = !c.archivo; if (c.archivo) pdf.href = c.archivo;
     if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
   });
   dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
+
+  /* ---------- Quiénes somos: cifras, representante legal y junta ---------- */
+  (function () {
+    var iniciales = function (nombre) { var p = String(nombre).trim().split(/\s+/); return ((p[0] || "")[0] + ((p.length > 2 ? p[p.length - 2] : p[1]) || "")[0]).toUpperCase(); };
+    var avatar = function (per) { return '<span class="persona__avatar">' + (per.foto ? '<img src="' + esc(per.foto) + '" alt="">' : esc(iniciales(per.nombre))) + "</span>"; };
+    var miles = function (n) { return Number(n).toLocaleString("es-CO"); };
+    var su = D.suscriptores || {}, cifras = [];
+    if (D.fundacion) cifras.push(["Al servicio del barrio desde", fecha(D.fundacion).getFullYear()]);
+    if (su.acueducto) cifras.push(["Suscriptores de acueducto", miles(su.acueducto)]);
+    if (su.alcantarillado) cifras.push(["Suscriptores de alcantarillado", miles(su.alcantarillado)]);
+    if (su.aseo) cifras.push(["Suscriptores de aseo", miles(su.aseo)]);
+    $("#cifras").innerHTML = cifras.map(function (c) { return "<div><dt>" + esc(c[0]) + "</dt><dd>" + esc(c[1]) + "</dd></div>"; }).join("");
+    if (D.fundacion) $("#nosotros-intro").textContent = "Somos una asociación de usuarios que presta acueducto, alcantarillado y aseo en el Barrio Cartagena desde " + fechaLarga(D.fundacion) + ". Los mismos suscriptores, reunidos en asamblea, eligen a la junta directiva que administra la empresa.";
+    var r = D.representanteLegal, s = D.suplente;
+    if (r) {
+      $("#representante").innerHTML = '<span class="representante__rotulo">' + esc(r.cargo || "Representante legal") + "</span>" + avatar(r) +
+        "<h3>" + esc(r.nombre) + "</h3>" + (r.desde ? "<p>En el cargo desde el " + fechaLarga(r.desde) + ".</p>" : "") +
+        (D.correoGeneral ? '<p>Contacto: <a href="mailto:' + esc(D.correoGeneral) + '" style="color:#fff">' + esc(D.correoGeneral) + "</a></p>" : "") +
+        (s ? '<div class="representante__suplente">' + avatar(s) + "<div><b>" + esc(s.nombre) + "</b><small>" + esc(s.cargo) + "</small></div></div>" : "");
+    } else $("#representante").hidden = true;
+    $("#junta").innerHTML = (D.junta || []).map(function (m) {
+      var rol = /presiden|secretar|tesor|fiscal/i.test(m.cargo) ? "directivo" : /vocal/i.test(m.cargo) ? "vocal" : "otro";
+      return '<li class="miembro" data-rol="' + rol + '">' + avatar(m) + "<div><b>" + esc(m.nombre) + "</b><small>" + esc(m.cargo) + "</small></div></li>";
+    }).join("");
+    var fuente = [];
+    fuente.push("Vigilados por la Superintendencia de Servicios Públicos Domiciliarios.");
+    if (D.auditorExterno) fuente.push("Auditor externo de gestión y resultados: " + D.auditorExterno.nombre + (D.auditorExterno.vigencia ? " (" + D.auditorExterno.vigencia + ")" : "") + ".");
+    if (D.rupsFecha) fuente.push("Información del Registro Único de Prestadores (RUPS), actualizado el " + fechaLarga(D.rupsFecha) + ".");
+    $("#nosotros-fuente").textContent = fuente.join(" ");
+  })();
 
   /* ---------- Tarifas ---------- */
   $("#periodo").textContent = D.periodoTarifas || "Tarifas vigentes";
@@ -341,9 +393,9 @@
   $("#txt-tel").textContent = D.telefono; $("#canal-tel").href = "tel:+57" + num(D.telefono);
   $("#txt-correo").textContent = D.correoPqrs; $("#canal-correo").href = "mailto:" + D.correoPqrs;
   $("#txt-horario").innerHTML = (D.horario || []).map(esc).join("<br>");
-  $("#pie-razon").textContent = D.razonSocial + (D.nit ? ". NIT " + D.nit : "");
+  $("#pie-razon").textContent = D.razonSocial + (D.nit ? ". NIT " + D.nit + "." : "");
   $("#pie-dir").textContent = D.direccion;
-  $("#pie-tel").textContent = D.telefono; $("#pie-tel").href = "tel:+57" + num(D.telefono);
+  $("#pie-tel").textContent = D.telefono + (D.telefonoFijo ? " / " + D.telefonoFijo : ""); $("#pie-tel").href = "tel:+57" + num(D.telefono);
   $("#pie-correo").textContent = D.correoGeneral; $("#pie-correo").href = "mailto:" + D.correoGeneral;
   if (D.facebook) { ["#canal-fb", "#pie-fb"].forEach(function (s) { var a = $(s); a.href = D.facebook; a.hidden = false; }); }
   $("#anio").textContent = new Date().getFullYear();

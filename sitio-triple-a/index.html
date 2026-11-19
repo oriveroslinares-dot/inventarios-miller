@@ -26,9 +26,9 @@
     </a>
     <button class="barra__menu" aria-expanded="false" aria-controls="nav"><span></span><span class="sr">Menú</span></button>
     <nav id="nav" class="nav" aria-label="Principal">
-      <a href="#recorrido">Nuestra agua</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#noticias">Noticias</a>
       <a href="#documentos">Documentos</a>
-      <a href="#comunicados">Comunicados</a>
       <a href="#tarifas">Tarifas</a>
       <a href="#atencion">Atención</a>
       <a class="nav__cta" href="#pagar">Pagar factura</a>
@@ -62,8 +62,8 @@
     </section>
 
     <!-- Cinta con el último comunicado -->
-    <a class="cinta con-ola" href="#comunicados" id="cinta" hidden>
-      <span class="cinta__rotulo">Último comunicado</span>
+    <a class="cinta con-ola" href="#noticias" id="cinta" hidden>
+      <span class="cinta__rotulo">Última noticia</span>
       <span class="cinta__texto" id="cinta-texto"></span>
       <span class="cinta__fecha" id="cinta-fecha"></span>
     </a>
@@ -167,6 +167,26 @@
       </div>
     </section>
 
+    <!-- ===================== QUIÉNES SOMOS / JUNTA ===================== -->
+    <section class="seccion nosotros" id="nosotros" aria-labelledby="t-nosotros">
+      <div class="contenedor">
+        <div class="cabeza-doble">
+          <h2 id="t-nosotros" class="titulo">Quiénes somos</h2>
+          <p class="intro" id="nosotros-intro">Somos una asociación de usuarios: los mismos suscriptores del barrio, reunidos en asamblea, eligen a la junta directiva que administra la empresa.</p>
+        </div>
+        <dl class="cifras" id="cifras"></dl>
+
+        <div class="gobierno">
+          <article class="representante" id="representante"></article>
+          <div class="junta">
+            <h3 class="junta__titulo">Junta directiva</h3>
+            <ul class="junta__lista" id="junta"></ul>
+          </div>
+        </div>
+        <p class="nosotros__fuente" id="nosotros-fuente"></p>
+      </div>
+    </section>
+
     <!-- ===================== CENTRO DE DOCUMENTOS ===================== -->
     <section class="seccion seccion--niebla" id="documentos" aria-labelledby="t-documentos">
       <div class="contenedor">
@@ -189,29 +209,33 @@
       </div>
     </section>
 
-    <!-- ===================== COMUNICADOS ===================== -->
-    <section class="seccion" id="comunicados" aria-labelledby="t-comunicados">
+    <!-- ===================== NOTICIAS (con Facebook) ===================== -->
+    <section class="seccion noticias" id="noticias" aria-labelledby="t-noticias">
       <div class="contenedor">
-        <h2 id="t-comunicados" class="titulo">Comunicados a la comunidad</h2>
-        <div class="comunicados" id="lista-comunicados"></div>
-      </div>
-    </section>
-
-    <!-- ===================== FACEBOOK ===================== -->
-    <section class="seccion seccion--niebla facebook" id="facebook" aria-labelledby="t-facebook" hidden>
-      <div class="contenedor facebook__grilla">
-        <div class="facebook__texto">
-          <h2 id="t-facebook" class="titulo">Novedades en Facebook</h2>
-          <p class="intro">Lo que publicamos en nuestra página de Facebook aparece aquí automáticamente: avisos rápidos, jornadas, fotos de obras y noticias del barrio.</p>
-          <a class="boton boton--fb" id="fb-seguir" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1Z"/></svg>Seguir en Facebook</a>
+        <div class="cabeza-doble">
+          <h2 id="t-noticias" class="titulo">Noticias</h2>
+          <p class="intro">Comunicados oficiales y novedades del barrio. Lo que publicamos en Facebook también aparece aquí.</p>
         </div>
-        <div class="facebook__marco" id="fb-marco">
-          <div class="facebook__cargando" id="fb-cargando">
-            <span class="facebook__gota"></span>
-            <p>Cargando publicaciones…</p>
+        <div class="noticias__grilla">
+          <div class="noticias__principal">
+            <div class="chips" id="noticias-filtros" role="group" aria-label="Filtrar noticias"></div>
+            <div class="noticias__lista" id="lista-noticias"></div>
           </div>
+          <aside class="noticias__fb" id="facebook" aria-labelledby="t-facebook" hidden>
+            <div class="fb__cabeza">
+              <span class="fb__logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1Z"/></svg></span>
+              <div><h3 id="t-facebook">En Facebook</h3><small>Publicaciones recientes</small></div>
+              <a class="fb__seguir" id="fb-seguir" href="#" target="_blank" rel="noopener">Seguir</a>
+            </div>
+            <div class="facebook__marco" id="fb-marco">
+              <div class="facebook__cargando" id="fb-cargando">
+                <span class="facebook__gota"></span>
+                <p>Cargando publicaciones…</p>
+              </div>
+            </div>
+            <p class="facebook__respaldo" id="fb-respaldo">¿No ve las publicaciones? <a id="fb-respaldo-link" href="#" target="_blank" rel="noopener">Véalas directamente en Facebook</a>.</p>
+          </aside>
         </div>
-        <p class="facebook__respaldo" id="fb-respaldo">¿No ve las publicaciones? Su navegador puede estar bloqueando Facebook. <a id="fb-respaldo-link" href="#" target="_blank" rel="noopener">Véalas directamente en Facebook</a>.</p>
       </div>
     </section>
 
